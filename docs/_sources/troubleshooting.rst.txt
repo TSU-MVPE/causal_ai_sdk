@@ -1,0 +1,34 @@
+Troubleshooting
+===============
+
+Common issues when using the Causal AI SDK.
+
+Authentication
+--------------
+
+* **AuthenticationError** — Check that your API key is valid and not expired.
+  Ensure the ``api_key`` passed to ``CausalAIClient`` matches the one expected
+  by the API.
+
+Network
+-------
+
+* **NetworkError** — Verify ``base_url`` is reachable and that no firewall or
+  proxy is blocking requests. For timeouts, consider retrying or increasing
+  client timeouts if you control the HTTP client.
+
+Validation
+----------
+
+* **ValidationError** — The API rejected the request (e.g. invalid payload,
+  unknown feature names, or constraint conflicts). Check the error message and
+  ensure ``current_observation``, ``targets``, and ``constraints`` match the
+  CD result schema (e.g. feature names from ``feature_names``).
+
+Async usage
+-----------
+
+* The client **must** be used as ``async with CausalAIClient(...) as client:``.
+  Do not instantiate and use outside an async context manager.
+
+For more detail, see :doc:`api/exceptions`.

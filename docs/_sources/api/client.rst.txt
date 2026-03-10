@@ -1,0 +1,15 @@
+Client
+======
+
+.. automodule:: causal_ai_sdk.client
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Config
+------
+
+.. automodule:: causal_ai_sdk.config
+   :members:
+   :undoc-members:
+   :show-inheritance:

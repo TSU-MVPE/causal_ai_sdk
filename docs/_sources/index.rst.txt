@@ -1,0 +1,69 @@
+.. Causal AI Python SDK documentation master file.
+
+Causal AI Python SDK Documentation
+=====================================
+
+Welcome to the Causal AI Python SDK documentation.
+
+This SDK provides a Python interface to the Causal AI Platform.
+
+Installation
+------------
+
+From source (from the ``MVP/causal_ai_sdk`` directory):
+
+.. code-block:: bash
+
+   pip install -e .
+
+For development: 
+
+.. code-block:: bash
+
+   pip install -e ".[dev]"
+
+Quick start
+-----------
+
+Use the client as an async context manager:
+
+.. code-block:: python
+
+   import asyncio
+   from causal_ai_sdk import CausalAIClient
+
+   async def main():
+       async with CausalAIClient(
+           api_key="your-api-key",
+           base_url="https://api.example.com"
+       ) as client:
+           session = await client.kg.init_session()
+           # ... use client.kg, client.cd, client.da
+
+   asyncio.run(main())
+
+Contents
+--------
+
+.. toctree::
+   :maxdepth: 2
+   :caption: API Reference
+
+   api/client
+   api/services
+   api/models
+   api/exceptions
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Additional Information
+
+   examples
+   changelog
+   troubleshooting
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Index
+
+   genindex

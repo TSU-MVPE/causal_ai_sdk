@@ -1,0 +1,22 @@
+Models
+======
+
+Data models used solely by the SDK.
+
+.. :no-index: is an intentional workaround to keep doc generation stable (duplicate
+   Sphinx object indexing from multiple doc targets).
+
+.. :exclude-members: avoids duplicate field rendering (same attrs in constructor)
+   and hides BaseModel internals (model_config, model_dump, etc.).
+
+.. autoclass:: causal_ai_sdk.models.cd.CDUploadURL
+   :members:
+   :show-inheritance:
+   :no-index:
+   :exclude-members: uuid, task_id, s3_key, upload_url, expires_in, model_config, model_fields, model_construct, model_dump, model_dump_json, model_copy, model_validate
+
+.. autoclass:: causal_ai_sdk.models.cd.UploadedData
+   :members:
+   :show-inheritance:
+   :no-index:
+   :exclude-members: task_id, session_uuid, s3_key, model_config, model_fields, model_construct, model_dump, model_dump_json, model_copy, model_validate

@@ -1,0 +1,7 @@
+Exceptions
+==========
+
+.. automodule:: causal_ai_sdk.exceptions
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,552 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>causal_ai_sdk.services.trackr_service &mdash; Causal AI Python SDK 1.10.0 Documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=1d24b1d9"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Causal AI Python SDK
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/client.html">Client</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/client.html#causal_ai_sdk.client.CausalAIClient"><code class="docutils literal notranslate"><span class="pre">CausalAIClient</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/client.html#causal_ai_sdk.client.CausalAIClient.__aenter__"><code class="docutils literal notranslate"><span class="pre">CausalAIClient.__aenter__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/client.html#causal_ai_sdk.client.CausalAIClient.__aexit__"><code class="docutils literal notranslate"><span class="pre">CausalAIClient.__aexit__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/client.html#causal_ai_sdk.client.CausalAIClient.__init__"><code class="docutils literal notranslate"><span class="pre">CausalAIClient.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/client.html#causal_ai_sdk.client.CausalAIClient.cd"><code class="docutils literal notranslate"><span class="pre">CausalAIClient.cd</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/client.html#causal_ai_sdk.client.CausalAIClient.da"><code class="docutils literal notranslate"><span class="pre">CausalAIClient.da</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/client.html#causal_ai_sdk.client.CausalAIClient.kg"><code class="docutils literal notranslate"><span class="pre">CausalAIClient.kg</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/client.html#module-causal_ai_sdk.config">Config</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/client.html#causal_ai_sdk.config.Config"><code class="docutils literal notranslate"><span class="pre">Config</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/client.html#causal_ai_sdk.config.Config.__init__"><code class="docutils literal notranslate"><span class="pre">Config.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/client.html#causal_ai_sdk.config.Config.__repr__"><code class="docutils literal notranslate"><span class="pre">Config.__repr__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/client.html#causal_ai_sdk.config.Config.get"><code class="docutils literal notranslate"><span class="pre">Config.get()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/services.html">Services</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/services.html#module-causal_ai_sdk.services.kg_service">Knowledge Graph</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.kg_service.KGService"><code class="docutils literal notranslate"><span class="pre">KGService</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.kg_service.KGService.__init__"><code class="docutils literal notranslate"><span class="pre">KGService.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.kg_service.KGService.add_kg"><code class="docutils literal notranslate"><span class="pre">KGService.add_kg()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.kg_service.KGService.delete_kg_session"><code class="docutils literal notranslate"><span class="pre">KGService.delete_kg_session()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.kg_service.KGService.delete_session"><code class="docutils literal notranslate"><span class="pre">KGService.delete_session()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.kg_service.KGService.get_kg"><code class="docutils literal notranslate"><span class="pre">KGService.get_kg()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.kg_service.KGService.get_upload_url"><code class="docutils literal notranslate"><span class="pre">KGService.get_upload_url()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.kg_service.KGService.init_session"><code class="docutils literal notranslate"><span class="pre">KGService.init_session()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.kg_service.KGService.list_kg"><code class="docutils literal notranslate"><span class="pre">KGService.list_kg()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.kg_service.KGService.upload_kg_from_file"><code class="docutils literal notranslate"><span class="pre">KGService.upload_kg_from_file()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/services.html#module-causal_ai_sdk.services.cd_service">Causal Discovery</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.cd_service.CDService"><code class="docutils literal notranslate"><span class="pre">CDService</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.cd_service.CDService.__init__"><code class="docutils literal notranslate"><span class="pre">CDService.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.cd_service.CDService.delete_matching"><code class="docutils literal notranslate"><span class="pre">CDService.delete_matching()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.cd_service.CDService.delete_multica_matching"><code class="docutils literal notranslate"><span class="pre">CDService.delete_multica_matching()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.cd_service.CDService.delete_task"><code class="docutils literal notranslate"><span class="pre">CDService.delete_task()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.cd_service.CDService.delete_trackr_matching"><code class="docutils literal notranslate"><span class="pre">CDService.delete_trackr_matching()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.cd_service.CDService.get_multica_matching"><code class="docutils literal notranslate"><span class="pre">CDService.get_multica_matching()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.cd_service.CDService.get_task_result"><code class="docutils literal notranslate"><span class="pre">CDService.get_task_result()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.cd_service.CDService.get_task_status"><code class="docutils literal notranslate"><span class="pre">CDService.get_task_status()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.cd_service.CDService.get_trackr_matching"><code class="docutils literal notranslate"><span class="pre">CDService.get_trackr_matching()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.cd_service.CDService.get_upload_url"><code class="docutils literal notranslate"><span class="pre">CDService.get_upload_url()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.cd_service.CDService.run_lingam"><code class="docutils literal notranslate"><span class="pre">CDService.run_lingam()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.cd_service.CDService.run_multica"><code class="docutils literal notranslate"><span class="pre">CDService.run_multica()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.cd_service.CDService.run_trackr"><code class="docutils literal notranslate"><span class="pre">CDService.run_trackr()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.cd_service.CDService.set_multica_matching"><code class="docutils literal notranslate"><span class="pre">CDService.set_multica_matching()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.cd_service.CDService.set_trackr_matching"><code class="docutils literal notranslate"><span class="pre">CDService.set_trackr_matching()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.cd_service.CDService.start_multica_matching"><code class="docutils literal notranslate"><span class="pre">CDService.start_multica_matching()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.cd_service.CDService.start_trackr_matching"><code class="docutils literal notranslate"><span class="pre">CDService.start_trackr_matching()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.cd_service.CDService.upload_data_for_lingam"><code class="docutils literal notranslate"><span class="pre">CDService.upload_data_for_lingam()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.cd_service.CDService.upload_data_for_multica"><code class="docutils literal notranslate"><span class="pre">CDService.upload_data_for_multica()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.cd_service.CDService.upload_data_for_trackr"><code class="docutils literal notranslate"><span class="pre">CDService.upload_data_for_trackr()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.cd_service.CDService.wait_for_matching"><code class="docutils literal notranslate"><span class="pre">CDService.wait_for_matching()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.cd_service.CDService.wait_for_task"><code class="docutils literal notranslate"><span class="pre">CDService.wait_for_task()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.multica_service.MultiCaService"><code class="docutils literal notranslate"><span class="pre">MultiCaService</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.multica_service.MultiCaService.delete_multica_matching"><code class="docutils literal notranslate"><span class="pre">MultiCaService.delete_multica_matching()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.multica_service.MultiCaService.get_multica_matching"><code class="docutils literal notranslate"><span class="pre">MultiCaService.get_multica_matching()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.multica_service.MultiCaService.run_multica"><code class="docutils literal notranslate"><span class="pre">MultiCaService.run_multica()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.multica_service.MultiCaService.set_multica_matching"><code class="docutils literal notranslate"><span class="pre">MultiCaService.set_multica_matching()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.multica_service.MultiCaService.start_multica_matching"><code class="docutils literal notranslate"><span class="pre">MultiCaService.start_multica_matching()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.multica_service.MultiCaService.upload_data_for_multica"><code class="docutils literal notranslate"><span class="pre">MultiCaService.upload_data_for_multica()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.multica_service.MultiCaService.wait_for_matching"><code class="docutils literal notranslate"><span class="pre">MultiCaService.wait_for_matching()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.lingam_service.LingamService"><code class="docutils literal notranslate"><span class="pre">LingamService</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.lingam_service.LingamService.run_lingam"><code class="docutils literal notranslate"><span class="pre">LingamService.run_lingam()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.lingam_service.LingamService.upload_data_for_lingam"><code class="docutils literal notranslate"><span class="pre">LingamService.upload_data_for_lingam()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.trackr_service.TraCKRService"><code class="docutils literal notranslate"><span class="pre">TraCKRService</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.trackr_service.TraCKRService.delete_trackr_matching"><code class="docutils literal notranslate"><span class="pre">TraCKRService.delete_trackr_matching()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.trackr_service.TraCKRService.get_trackr_matching"><code class="docutils literal notranslate"><span class="pre">TraCKRService.get_trackr_matching()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.trackr_service.TraCKRService.run_trackr"><code class="docutils literal notranslate"><span class="pre">TraCKRService.run_trackr()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.trackr_service.TraCKRService.set_trackr_matching"><code class="docutils literal notranslate"><span class="pre">TraCKRService.set_trackr_matching()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.trackr_service.TraCKRService.start_trackr_matching"><code class="docutils literal notranslate"><span class="pre">TraCKRService.start_trackr_matching()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.trackr_service.TraCKRService.upload_data_for_trackr"><code class="docutils literal notranslate"><span class="pre">TraCKRService.upload_data_for_trackr()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.trackr_service.TraCKRService.wait_for_matching"><code class="docutils literal notranslate"><span class="pre">TraCKRService.wait_for_matching()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/services.html#module-causal_ai_sdk.services.da_service">Decision Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.da_service.DAService"><code class="docutils literal notranslate"><span class="pre">DAService</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.da_service.DAService.delete_task"><code class="docutils literal notranslate"><span class="pre">DAService.delete_task()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.da_service.DAService.get_task_result"><code class="docutils literal notranslate"><span class="pre">DAService.get_task_result()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.da_service.DAService.get_task_status"><code class="docutils literal notranslate"><span class="pre">DAService.get_task_status()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.da_service.DAService.run_enumerate"><code class="docutils literal notranslate"><span class="pre">DAService.run_enumerate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.da_service.DAService.run_explain"><code class="docutils literal notranslate"><span class="pre">DAService.run_explain()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/services.html#causal_ai_sdk.services.da_service.DAService.wait_for_task"><code class="docutils literal notranslate"><span class="pre">DAService.wait_for_task()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/exceptions.html">Exceptions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/exceptions.html#causal_ai_sdk.exceptions.APIError"><code class="docutils literal notranslate"><span class="pre">APIError</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/exceptions.html#causal_ai_sdk.exceptions.AuthenticationError"><code class="docutils literal notranslate"><span class="pre">AuthenticationError</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/exceptions.html#causal_ai_sdk.exceptions.CausalAIError"><code class="docutils literal notranslate"><span class="pre">CausalAIError</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/exceptions.html#causal_ai_sdk.exceptions.CausalAIError.__init__"><code class="docutils literal notranslate"><span class="pre">CausalAIError.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/exceptions.html#causal_ai_sdk.exceptions.CausalAIError.__str__"><code class="docutils literal notranslate"><span class="pre">CausalAIError.__str__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/exceptions.html#causal_ai_sdk.exceptions.NetworkError"><code class="docutils literal notranslate"><span class="pre">NetworkError</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/exceptions.html#causal_ai_sdk.exceptions.NotFoundError"><code class="docutils literal notranslate"><span class="pre">NotFoundError</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/exceptions.html#causal_ai_sdk.exceptions.ValidationError"><code class="docutils literal notranslate"><span class="pre">ValidationError</span></code></a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Additional Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples.html#knowledge-graph">Knowledge Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples.html#causal-discovery-multica">Causal Discovery (MultiCa)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples.html#causal-discovery-lingam">Causal Discovery (LiNGAM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples.html#causal-discovery-trackr">Causal Discovery (TraCKR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples.html#decision-analysis">Decision Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples.html#end-to-end-flows">End-to-end flows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../examples.html#lingam-decision-analysis">LiNGAM + Decision Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../examples.html#column-matching-multica">Column matching (MultiCa)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../changelog.html#unreleased">Unreleased</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../changelog.html#id1">1.6.4</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../troubleshooting.html">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../troubleshooting.html#authentication">Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../troubleshooting.html#network">Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../troubleshooting.html#validation">Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../troubleshooting.html#async-usage">Async usage</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Index</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Causal AI Python SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">causal_ai_sdk.services.trackr_service</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for causal_ai_sdk.services.trackr_service</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;TraCKR Causal Discovery service.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">causal_ai_sdk.contracts.requests</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">CDMatchSetRequestContract</span><span class="p">,</span>
+    <span class="n">CDTrackrMatchStartRequestContract</span><span class="p">,</span>
+    <span class="n">CDTrackrRunRequestContract</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">causal_ai_sdk.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">APIError</span><span class="p">,</span> <span class="n">ValidationError</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">causal_ai_sdk.models.cd</span><span class="w"> </span><span class="kn">import</span> <span class="n">UploadedData</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">causal_ai_sdk.services.base_cd_service</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseCDService</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">causal_ai_sdk.utils.polling</span><span class="w"> </span><span class="kn">import</span> <span class="n">poll_until_ready_or_fail</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">ValidationError</span> <span class="k">as</span> <span class="n">PydanticValidationError</span>
+
+
+<div class="viewcode-block" id="TraCKRService">
+<a class="viewcode-back" href="../../../api/services.html#causal_ai_sdk.services.trackr_service.TraCKRService">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">TraCKRService</span><span class="p">(</span><span class="n">BaseCDService</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;TraCKR Causal Discovery service.</span>
+
+<span class="sd">    This service provides methods for uploading single dataset,</span>
+<span class="sd">    managing column matching, and executing TraCKR causal discovery tasks.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_validate_upload_requirements</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_paths</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Path</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate TraCKR upload requirements.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            file_paths (List[Path]): List of file paths to validate</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[Path, Any]: Empty cache (TraCKR does not pre-read files).</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValidationError: If validation fails (TraCKR only accepts single file)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">file_paths</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span>
+                <span class="n">message</span><span class="o">=</span><span class="s2">&quot;TraCKR only accepts a single file, not multiple files&quot;</span><span class="p">,</span>
+                <span class="n">status_code</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">response_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">file_paths</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span>
+                <span class="n">message</span><span class="o">=</span><span class="s2">&quot;At least one file path is required&quot;</span><span class="p">,</span>
+                <span class="n">status_code</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">response_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="c1"># Validate file existence then format</span>
+        <span class="k">for</span> <span class="n">fp</span> <span class="ow">in</span> <span class="n">file_paths</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">fp</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+                <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span>
+                    <span class="n">message</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;File not found: </span><span class="si">{</span><span class="n">fp</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                    <span class="n">status_code</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                    <span class="n">response_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_validate_file_format</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">{}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_build_upload_body</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_paths</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Path</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Build upload body: single file as raw bytes.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            file_paths (List[Path]): Exactly one file path (already validated).</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            tuple[bytes, str]: (file bytes, Content-Type)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">fp</span> <span class="o">=</span> <span class="n">file_paths</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">body</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">read_bytes</span><span class="p">()</span>
+        <span class="n">content_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_content_type_for_path</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">body</span><span class="p">,</span> <span class="n">content_type</span>
+
+<div class="viewcode-block" id="TraCKRService.upload_data_for_trackr">
+<a class="viewcode-back" href="../../../api/services.html#causal_ai_sdk.services.trackr_service.TraCKRService.upload_data_for_trackr">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">upload_data_for_trackr</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">session_uuid</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">file_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UploadedData</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Upload single dataset for TraCKR causal discovery.</span>
+
+<span class="sd">        This method automatically:</span>
+<span class="sd">        1. Validates that exactly one file is provided</span>
+<span class="sd">        2. Validates that the file is in a supported format</span>
+<span class="sd">        3. Gets a presigned upload URL</span>
+<span class="sd">        4. Uploads the file as raw bytes to S3</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            session_uuid (str): Session UUID</span>
+<span class="sd">            file_path (Union[str, Path]): Path to a single file (CSV or JSON)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            UploadedData: Uploaded data reference (task_id, session_uuid, s3_key).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">file_path_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">Path</span><span class="p">(</span><span class="n">file_path</span><span class="p">)]</span>
+        <span class="n">upload_url</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_upload_data_internal</span><span class="p">(</span><span class="n">session_uuid</span><span class="p">,</span> <span class="n">file_path_list</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">UploadedData</span><span class="p">(</span>
+            <span class="n">task_id</span><span class="o">=</span><span class="n">upload_url</span><span class="o">.</span><span class="n">task_id</span><span class="p">,</span>
+            <span class="n">session_uuid</span><span class="o">=</span><span class="n">session_uuid</span><span class="p">,</span>
+            <span class="n">s3_key</span><span class="o">=</span><span class="n">upload_url</span><span class="o">.</span><span class="n">s3_key</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TraCKRService.wait_for_matching">
+<a class="viewcode-back" href="../../../api/services.html#causal_ai_sdk.services.trackr_service.TraCKRService.wait_for_matching">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">wait_for_matching</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">session_uuid</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">300</span><span class="p">,</span>
+        <span class="n">interval</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Wait for TraCKR matching computation to complete (with automatic polling).</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            session_uuid (str): Session UUID</span>
+<span class="sd">            timeout (int): Maximum time to wait in seconds (default: 300)</span>
+<span class="sd">            interval (int): Time between polls in seconds (default: 3)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict: Final matching result</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">check</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_trackr_matching</span><span class="p">(</span><span class="n">session_uuid</span><span class="p">)</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">on_failed</span><span class="p">(</span><span class="n">result</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">error_msg</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;Unknown error&quot;</span>
+            <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span>
+                <span class="n">message</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Matching failed: </span><span class="si">{</span><span class="n">error_msg</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                <span class="n">status_code</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">response_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="k">return</span> <span class="k">await</span> <span class="n">poll_until_ready_or_fail</span><span class="p">(</span>
+            <span class="n">check_func</span><span class="o">=</span><span class="n">check</span><span class="p">,</span>
+            <span class="n">is_ready</span><span class="o">=</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;completed&quot;</span><span class="p">,</span>
+            <span class="n">is_failed</span><span class="o">=</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;failed&quot;</span><span class="p">,</span>
+            <span class="n">on_failed</span><span class="o">=</span><span class="n">on_failed</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span>
+            <span class="n">interval</span><span class="o">=</span><span class="n">interval</span><span class="p">,</span>
+            <span class="n">timeout_error_message</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Matching did not complete within timeout (</span><span class="si">{</span><span class="n">timeout</span><span class="si">}</span><span class="s2">s)&quot;</span><span class="p">,</span>
+            <span class="n">retry_exceptions</span><span class="o">=</span><span class="p">(</span><span class="n">APIError</span><span class="p">,),</span>
+            <span class="n">retry_if</span><span class="o">=</span><span class="k">lambda</span> <span class="n">e</span><span class="p">:</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="s2">&quot;status_code&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">503</span><span class="p">),</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TraCKRService.start_trackr_matching">
+<a class="viewcode-back" href="../../../api/services.html#causal_ai_sdk.services.trackr_service.TraCKRService.start_trackr_matching">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">start_trackr_matching</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">uploaded_data</span><span class="p">:</span> <span class="n">UploadedData</span><span class="p">,</span>
+        <span class="n">source_kg_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">target_metadata</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">source_metadata</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Start TraCKR column matching computation.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            uploaded_data (UploadedData): From upload_data_for_trackr.</span>
+<span class="sd">            source_kg_id (str): Source knowledge graph ID (must exist in KG service)</span>
+<span class="sd">            target_metadata (Optional[Dict]): Optional column descriptions for target dataset.</span>
+<span class="sd">            source_metadata (Optional[Dict]): Optional column descriptions for source KG.</span>
+<span class="sd">            params (Optional[Dict]): Optional matching parameters</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict: Matching task response (status: pending)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ref</span> <span class="o">=</span> <span class="n">uploaded_data</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contract_path</span><span class="p">(</span><span class="s2">&quot;cd.start_trackr_matching&quot;</span><span class="p">,</span> <span class="n">uuid</span><span class="o">=</span><span class="n">ref</span><span class="o">.</span><span class="n">session_uuid</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">CDTrackrMatchStartRequestContract</span><span class="p">(</span>
+            <span class="n">target_s3_key</span><span class="o">=</span><span class="n">ref</span><span class="o">.</span><span class="n">s3_key</span><span class="p">,</span>
+            <span class="n">source_kg_id</span><span class="o">=</span><span class="n">source_kg_id</span><span class="p">,</span>
+            <span class="n">target_metadata</span><span class="o">=</span><span class="n">target_metadata</span><span class="p">,</span>
+            <span class="n">source_metadata</span><span class="o">=</span><span class="n">source_metadata</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">json_data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">]]</span> <span class="o">=</span> <span class="n">payload</span><span class="o">.</span><span class="n">model_dump</span><span class="p">(</span><span class="n">exclude_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">json_data</span><span class="o">=</span><span class="n">json_data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">response</span></div>
+
+
+<div class="viewcode-block" id="TraCKRService.get_trackr_matching">
+<a class="viewcode-back" href="../../../api/services.html#causal_ai_sdk.services.trackr_service.TraCKRService.get_trackr_matching">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_trackr_matching</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session_uuid</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get TraCKR column matching results.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            session_uuid (str): Session UUID</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict: Matching result with current_matched, knowledge_coverage, etc.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contract_path</span><span class="p">(</span><span class="s2">&quot;cd.get_trackr_matching&quot;</span><span class="p">,</span> <span class="n">uuid</span><span class="o">=</span><span class="n">session_uuid</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_request</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">response</span></div>
+
+
+<div class="viewcode-block" id="TraCKRService.set_trackr_matching">
+<a class="viewcode-back" href="../../../api/services.html#causal_ai_sdk.services.trackr_service.TraCKRService.set_trackr_matching">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">set_trackr_matching</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session_uuid</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">matching</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set/update TraCKR column matching results (update of existing state).</span>
+
+<span class="sd">        Used to update an existing matching state. The API requires matching to be</span>
+<span class="sd">        a non-empty dict. When creating a new state (no prior matching), the API</span>
+<span class="sd">        requires target_columns, source_columns, source_kg_id and matching must</span>
+<span class="sd">        contain a key for every target column (use &quot;&quot; for no match).</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            session_uuid (str): Session UUID</span>
+<span class="sd">            matching (Dict[str, str]): Column mapping (target column -&gt; source column).</span>
+<span class="sd">                Must be non-empty. Use &quot;&quot; for target columns with no match.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValidationError: If matching is empty (400). On API 400, response_data</span>
+<span class="sd">                may contain &quot;missing_keys&quot; or &quot;error&quot;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">matching</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span>
+                <span class="n">message</span><span class="o">=</span><span class="s2">&quot;&#39;matching&#39; must be a non-empty dictionary&quot;</span><span class="p">,</span>
+                <span class="n">status_code</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span>
+                <span class="n">response_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contract_path</span><span class="p">(</span><span class="s2">&quot;cd.set_trackr_matching&quot;</span><span class="p">,</span> <span class="n">uuid</span><span class="o">=</span><span class="n">session_uuid</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">CDMatchSetRequestContract</span><span class="p">(</span><span class="n">matching</span><span class="o">=</span><span class="n">matching</span><span class="p">)</span>
+        <span class="n">json_data</span> <span class="o">=</span> <span class="n">payload</span><span class="o">.</span><span class="n">model_dump</span><span class="p">()</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">json_data</span><span class="o">=</span><span class="n">json_data</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TraCKRService.run_trackr">
+<a class="viewcode-back" href="../../../api/services.html#causal_ai_sdk.services.trackr_service.TraCKRService.run_trackr">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">run_trackr</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">uploaded_data</span><span class="p">:</span> <span class="n">UploadedData</span><span class="p">,</span>
+        <span class="n">transferred_knowledge</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
+        <span class="n">threshold</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span>
+        <span class="n">params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Submit a TraCKR causal discovery task with knowledge transfer.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            uploaded_data (UploadedData): From upload_data_for_trackr.</span>
+<span class="sd">            transferred_knowledge (Dict[str, str]): Knowledge transfer metadata (required).</span>
+<span class="sd">                Must contain both &quot;session_uuid&quot; and &quot;kg_id&quot;.</span>
+<span class="sd">            threshold (Optional[float]): Significance threshold (default: 0.01).</span>
+<span class="sd">                Use ``None`` to omit threshold and let backend defaults apply.</span>
+<span class="sd">            params (Optional[Dict]): Optional TraCKR parameters</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict: Task response (status: queued)</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValidationError: If transferred_knowledge is missing or lacks session_uuid/kg_id (400).</span>
+<span class="sd">            NotFoundError: If the knowledge graph does not exist (404).  # noqa: DAR402</span>
+<span class="sd">            APIError: If KG has no S3 reference or validation fails (500).  # noqa: DAR402</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ref</span> <span class="o">=</span> <span class="n">uploaded_data</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">payload</span> <span class="o">=</span> <span class="n">CDTrackrRunRequestContract</span><span class="p">(</span>
+                <span class="n">task_id</span><span class="o">=</span><span class="n">ref</span><span class="o">.</span><span class="n">task_id</span><span class="p">,</span>
+                <span class="n">s3_key</span><span class="o">=</span><span class="n">ref</span><span class="o">.</span><span class="n">s3_key</span><span class="p">,</span>
+                <span class="n">transferred_knowledge</span><span class="o">=</span><span class="n">transferred_knowledge</span><span class="p">,</span>
+                <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">,</span>
+                <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">except</span> <span class="n">PydanticValidationError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span>
+                <span class="n">message</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span>
+                <span class="n">status_code</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span>
+                <span class="n">response_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+
+        <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contract_path</span><span class="p">(</span><span class="s2">&quot;cd.run_trackr&quot;</span><span class="p">,</span> <span class="n">uuid</span><span class="o">=</span><span class="n">ref</span><span class="o">.</span><span class="n">session_uuid</span><span class="p">)</span>
+        <span class="n">json_data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Dict</span><span class="p">]]</span> <span class="o">=</span> <span class="n">payload</span><span class="o">.</span><span class="n">model_dump</span><span class="p">(</span><span class="n">exclude_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">json_data</span><span class="o">=</span><span class="n">json_data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">response</span></div>
+
+
+<div class="viewcode-block" id="TraCKRService.delete_trackr_matching">
+<a class="viewcode-back" href="../../../api/services.html#causal_ai_sdk.services.trackr_service.TraCKRService.delete_trackr_matching">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">delete_trackr_matching</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session_uuid</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Delete TraCKR matching state and S3 artifacts for the session.</span>
+
+<span class="sd">        Corresponds to DELETE /cd/match/{session_uuid}?matching_type=trackr.</span>
+<span class="sd">        Use after run_trackr to clean up matching state.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            session_uuid (str): Session UUID</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            NotFoundError: If matching state does not exist (404).  # noqa: DAR402</span>
+<span class="sd">            APIError: If matching is still pending (409).  # noqa: DAR402</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">delete_matching</span><span class="p">(</span><span class="n">session_uuid</span><span class="p">,</span> <span class="s2">&quot;trackr&quot;</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Fujitsu TSU MVPE Engineering Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

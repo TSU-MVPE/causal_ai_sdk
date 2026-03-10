@@ -1,0 +1,43 @@
+Services
+========
+
+The client exposes these services as ``client.kg``, ``client.cd``, and ``client.da``.
+
+Knowledge Graph
+---------------
+
+.. automodule:: causal_ai_sdk.services.kg_service
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Causal Discovery
+----------------
+
+.. automodule:: causal_ai_sdk.services.cd_service
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: causal_ai_sdk.services.multica_service
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: causal_ai_sdk.services.lingam_service
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: causal_ai_sdk.services.trackr_service
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Decision Analysis
+-----------------
+
+.. automodule:: causal_ai_sdk.services.da_service
+   :members:
+   :undoc-members:
+   :show-inheritance:

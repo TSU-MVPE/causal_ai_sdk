@@ -1,0 +1,12 @@
+Changelog
+=========
+
+Unreleased
+----------
+
+* SDK documentation (Sphinx) added under ``docs/``.
+
+1.6.4
+-----
+
+* (See repository history for earlier changes.)

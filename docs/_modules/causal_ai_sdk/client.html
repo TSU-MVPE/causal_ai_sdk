@@ -1,0 +1,399 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>causal_ai_sdk.client &mdash; Causal AI Python SDK 1.10.0 Documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=1d24b1d9"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Causal AI Python SDK
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/client.html">Client</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../api/client.html#causal_ai_sdk.client.CausalAIClient"><code class="docutils literal notranslate"><span class="pre">CausalAIClient</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api/client.html#causal_ai_sdk.client.CausalAIClient.__aenter__"><code class="docutils literal notranslate"><span class="pre">CausalAIClient.__aenter__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/client.html#causal_ai_sdk.client.CausalAIClient.__aexit__"><code class="docutils literal notranslate"><span class="pre">CausalAIClient.__aexit__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/client.html#causal_ai_sdk.client.CausalAIClient.__init__"><code class="docutils literal notranslate"><span class="pre">CausalAIClient.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/client.html#causal_ai_sdk.client.CausalAIClient.cd"><code class="docutils literal notranslate"><span class="pre">CausalAIClient.cd</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/client.html#causal_ai_sdk.client.CausalAIClient.da"><code class="docutils literal notranslate"><span class="pre">CausalAIClient.da</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/client.html#causal_ai_sdk.client.CausalAIClient.kg"><code class="docutils literal notranslate"><span class="pre">CausalAIClient.kg</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/client.html#module-causal_ai_sdk.config">Config</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api/client.html#causal_ai_sdk.config.Config"><code class="docutils literal notranslate"><span class="pre">Config</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/client.html#causal_ai_sdk.config.Config.__init__"><code class="docutils literal notranslate"><span class="pre">Config.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/client.html#causal_ai_sdk.config.Config.__repr__"><code class="docutils literal notranslate"><span class="pre">Config.__repr__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/client.html#causal_ai_sdk.config.Config.get"><code class="docutils literal notranslate"><span class="pre">Config.get()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/services.html">Services</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../api/services.html#module-causal_ai_sdk.services.kg_service">Knowledge Graph</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.kg_service.KGService"><code class="docutils literal notranslate"><span class="pre">KGService</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.kg_service.KGService.__init__"><code class="docutils literal notranslate"><span class="pre">KGService.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.kg_service.KGService.add_kg"><code class="docutils literal notranslate"><span class="pre">KGService.add_kg()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.kg_service.KGService.delete_kg_session"><code class="docutils literal notranslate"><span class="pre">KGService.delete_kg_session()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.kg_service.KGService.delete_session"><code class="docutils literal notranslate"><span class="pre">KGService.delete_session()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.kg_service.KGService.get_kg"><code class="docutils literal notranslate"><span class="pre">KGService.get_kg()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.kg_service.KGService.get_upload_url"><code class="docutils literal notranslate"><span class="pre">KGService.get_upload_url()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.kg_service.KGService.init_session"><code class="docutils literal notranslate"><span class="pre">KGService.init_session()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.kg_service.KGService.list_kg"><code class="docutils literal notranslate"><span class="pre">KGService.list_kg()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.kg_service.KGService.upload_kg_from_file"><code class="docutils literal notranslate"><span class="pre">KGService.upload_kg_from_file()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/services.html#module-causal_ai_sdk.services.cd_service">Causal Discovery</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.cd_service.CDService"><code class="docutils literal notranslate"><span class="pre">CDService</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.cd_service.CDService.__init__"><code class="docutils literal notranslate"><span class="pre">CDService.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.cd_service.CDService.delete_matching"><code class="docutils literal notranslate"><span class="pre">CDService.delete_matching()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.cd_service.CDService.delete_multica_matching"><code class="docutils literal notranslate"><span class="pre">CDService.delete_multica_matching()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.cd_service.CDService.delete_task"><code class="docutils literal notranslate"><span class="pre">CDService.delete_task()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.cd_service.CDService.delete_trackr_matching"><code class="docutils literal notranslate"><span class="pre">CDService.delete_trackr_matching()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.cd_service.CDService.get_multica_matching"><code class="docutils literal notranslate"><span class="pre">CDService.get_multica_matching()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.cd_service.CDService.get_task_result"><code class="docutils literal notranslate"><span class="pre">CDService.get_task_result()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.cd_service.CDService.get_task_status"><code class="docutils literal notranslate"><span class="pre">CDService.get_task_status()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.cd_service.CDService.get_trackr_matching"><code class="docutils literal notranslate"><span class="pre">CDService.get_trackr_matching()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.cd_service.CDService.get_upload_url"><code class="docutils literal notranslate"><span class="pre">CDService.get_upload_url()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.cd_service.CDService.run_lingam"><code class="docutils literal notranslate"><span class="pre">CDService.run_lingam()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.cd_service.CDService.run_multica"><code class="docutils literal notranslate"><span class="pre">CDService.run_multica()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.cd_service.CDService.run_trackr"><code class="docutils literal notranslate"><span class="pre">CDService.run_trackr()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.cd_service.CDService.set_multica_matching"><code class="docutils literal notranslate"><span class="pre">CDService.set_multica_matching()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.cd_service.CDService.set_trackr_matching"><code class="docutils literal notranslate"><span class="pre">CDService.set_trackr_matching()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.cd_service.CDService.start_multica_matching"><code class="docutils literal notranslate"><span class="pre">CDService.start_multica_matching()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.cd_service.CDService.start_trackr_matching"><code class="docutils literal notranslate"><span class="pre">CDService.start_trackr_matching()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.cd_service.CDService.upload_data_for_lingam"><code class="docutils literal notranslate"><span class="pre">CDService.upload_data_for_lingam()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.cd_service.CDService.upload_data_for_multica"><code class="docutils literal notranslate"><span class="pre">CDService.upload_data_for_multica()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.cd_service.CDService.upload_data_for_trackr"><code class="docutils literal notranslate"><span class="pre">CDService.upload_data_for_trackr()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.cd_service.CDService.wait_for_matching"><code class="docutils literal notranslate"><span class="pre">CDService.wait_for_matching()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.cd_service.CDService.wait_for_task"><code class="docutils literal notranslate"><span class="pre">CDService.wait_for_task()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.multica_service.MultiCaService"><code class="docutils literal notranslate"><span class="pre">MultiCaService</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.multica_service.MultiCaService.delete_multica_matching"><code class="docutils literal notranslate"><span class="pre">MultiCaService.delete_multica_matching()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.multica_service.MultiCaService.get_multica_matching"><code class="docutils literal notranslate"><span class="pre">MultiCaService.get_multica_matching()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.multica_service.MultiCaService.run_multica"><code class="docutils literal notranslate"><span class="pre">MultiCaService.run_multica()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.multica_service.MultiCaService.set_multica_matching"><code class="docutils literal notranslate"><span class="pre">MultiCaService.set_multica_matching()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.multica_service.MultiCaService.start_multica_matching"><code class="docutils literal notranslate"><span class="pre">MultiCaService.start_multica_matching()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.multica_service.MultiCaService.upload_data_for_multica"><code class="docutils literal notranslate"><span class="pre">MultiCaService.upload_data_for_multica()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.multica_service.MultiCaService.wait_for_matching"><code class="docutils literal notranslate"><span class="pre">MultiCaService.wait_for_matching()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.lingam_service.LingamService"><code class="docutils literal notranslate"><span class="pre">LingamService</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.lingam_service.LingamService.run_lingam"><code class="docutils literal notranslate"><span class="pre">LingamService.run_lingam()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.lingam_service.LingamService.upload_data_for_lingam"><code class="docutils literal notranslate"><span class="pre">LingamService.upload_data_for_lingam()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.trackr_service.TraCKRService"><code class="docutils literal notranslate"><span class="pre">TraCKRService</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.trackr_service.TraCKRService.delete_trackr_matching"><code class="docutils literal notranslate"><span class="pre">TraCKRService.delete_trackr_matching()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.trackr_service.TraCKRService.get_trackr_matching"><code class="docutils literal notranslate"><span class="pre">TraCKRService.get_trackr_matching()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.trackr_service.TraCKRService.run_trackr"><code class="docutils literal notranslate"><span class="pre">TraCKRService.run_trackr()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.trackr_service.TraCKRService.set_trackr_matching"><code class="docutils literal notranslate"><span class="pre">TraCKRService.set_trackr_matching()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.trackr_service.TraCKRService.start_trackr_matching"><code class="docutils literal notranslate"><span class="pre">TraCKRService.start_trackr_matching()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.trackr_service.TraCKRService.upload_data_for_trackr"><code class="docutils literal notranslate"><span class="pre">TraCKRService.upload_data_for_trackr()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.trackr_service.TraCKRService.wait_for_matching"><code class="docutils literal notranslate"><span class="pre">TraCKRService.wait_for_matching()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/services.html#module-causal_ai_sdk.services.da_service">Decision Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.da_service.DAService"><code class="docutils literal notranslate"><span class="pre">DAService</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.da_service.DAService.delete_task"><code class="docutils literal notranslate"><span class="pre">DAService.delete_task()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.da_service.DAService.get_task_result"><code class="docutils literal notranslate"><span class="pre">DAService.get_task_result()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.da_service.DAService.get_task_status"><code class="docutils literal notranslate"><span class="pre">DAService.get_task_status()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.da_service.DAService.run_enumerate"><code class="docutils literal notranslate"><span class="pre">DAService.run_enumerate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.da_service.DAService.run_explain"><code class="docutils literal notranslate"><span class="pre">DAService.run_explain()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/services.html#causal_ai_sdk.services.da_service.DAService.wait_for_task"><code class="docutils literal notranslate"><span class="pre">DAService.wait_for_task()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/exceptions.html">Exceptions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../api/exceptions.html#causal_ai_sdk.exceptions.APIError"><code class="docutils literal notranslate"><span class="pre">APIError</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/exceptions.html#causal_ai_sdk.exceptions.AuthenticationError"><code class="docutils literal notranslate"><span class="pre">AuthenticationError</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/exceptions.html#causal_ai_sdk.exceptions.CausalAIError"><code class="docutils literal notranslate"><span class="pre">CausalAIError</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api/exceptions.html#causal_ai_sdk.exceptions.CausalAIError.__init__"><code class="docutils literal notranslate"><span class="pre">CausalAIError.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/exceptions.html#causal_ai_sdk.exceptions.CausalAIError.__str__"><code class="docutils literal notranslate"><span class="pre">CausalAIError.__str__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/exceptions.html#causal_ai_sdk.exceptions.NetworkError"><code class="docutils literal notranslate"><span class="pre">NetworkError</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/exceptions.html#causal_ai_sdk.exceptions.NotFoundError"><code class="docutils literal notranslate"><span class="pre">NotFoundError</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/exceptions.html#causal_ai_sdk.exceptions.ValidationError"><code class="docutils literal notranslate"><span class="pre">ValidationError</span></code></a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Additional Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../examples.html#knowledge-graph">Knowledge Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples.html#causal-discovery-multica">Causal Discovery (MultiCa)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples.html#causal-discovery-lingam">Causal Discovery (LiNGAM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples.html#causal-discovery-trackr">Causal Discovery (TraCKR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples.html#decision-analysis">Decision Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples.html#end-to-end-flows">End-to-end flows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples.html#lingam-decision-analysis">LiNGAM + Decision Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples.html#column-matching-multica">Column matching (MultiCa)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#unreleased">Unreleased</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#id1">1.6.4</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting.html">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../troubleshooting.html#authentication">Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../troubleshooting.html#network">Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../troubleshooting.html#validation">Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../troubleshooting.html#async-usage">Async usage</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Index</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Causal AI Python SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">causal_ai_sdk.client</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for causal_ai_sdk.client</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Main client entry point.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">types</span><span class="w"> </span><span class="kn">import</span> <span class="n">TracebackType</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Type</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">causal_ai_sdk.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">Config</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">causal_ai_sdk.http.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTTPClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">causal_ai_sdk.http.httpx_client</span><span class="w"> </span><span class="kn">import</span> <span class="n">HttpxHTTPClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">causal_ai_sdk.services.cd_service</span><span class="w"> </span><span class="kn">import</span> <span class="n">CDService</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">causal_ai_sdk.services.da_service</span><span class="w"> </span><span class="kn">import</span> <span class="n">DAService</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">causal_ai_sdk.services.kg_service</span><span class="w"> </span><span class="kn">import</span> <span class="n">KGService</span>
+
+
+<div class="viewcode-block" id="CausalAIClient">
+<a class="viewcode-back" href="../../api/client.html#causal_ai_sdk.client.CausalAIClient">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">CausalAIClient</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Main client for Causal AI SDK.</span>
+
+<span class="sd">    This client provides a unified interface to access all services.</span>
+<span class="sd">    It implements the Facade pattern, hiding the complexity of service</span>
+<span class="sd">    initialization and configuration.</span>
+
+<span class="sd">    The client must be used as an async context manager. Do not use without</span>
+<span class="sd">    ``async with CausalAIClient(...) as client:``.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; async with CausalAIClient(</span>
+<span class="sd">        ...     api_key=&quot;your-api-key&quot;,</span>
+<span class="sd">        ...     base_url=&quot;https://api.example.com&quot;</span>
+<span class="sd">        ... ) as client:</span>
+<span class="sd">        ...     session = await client.kg.init_session()</span>
+<span class="sd">        ...     kg = await client.kg.upload_kg_from_file(</span>
+<span class="sd">        ...         session_uuid=session.uuid,</span>
+<span class="sd">        ...         file_path=&quot;graph.json&quot;</span>
+<span class="sd">        ...     )</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="CausalAIClient.__init__">
+<a class="viewcode-back" href="../../api/client.html#causal_ai_sdk.client.CausalAIClient.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">api_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">base_url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">http_client</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">HTTPClient</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Config</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize Causal AI client.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            api_key (str): API Key for authentication</span>
+<span class="sd">            base_url (str): Base URL of the API Gateway</span>
+<span class="sd">            http_client (Optional[HTTPClient]): Optional HTTP client instance</span>
+<span class="sd">                (defaults to HttpxHTTPClient). When provided, the caller is</span>
+<span class="sd">                responsible for its lifecycle (use as async context manager or</span>
+<span class="sd">                close it when done).</span>
+<span class="sd">            config (Optional[Config]): Optional Config instance</span>
+<span class="sd">                (will be created if not provided)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Create or use provided Config</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">config</span> <span class="ow">or</span> <span class="n">Config</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">,</span> <span class="n">base_url</span><span class="o">=</span><span class="n">base_url</span><span class="p">)</span>
+
+        <span class="c1"># Create or use provided HTTP client</span>
+        <span class="k">if</span> <span class="n">http_client</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_http_client</span><span class="p">:</span> <span class="n">HTTPClient</span> <span class="o">=</span> <span class="n">HttpxHTTPClient</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">timeout</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_owns_http_client</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_http_client</span> <span class="o">=</span> <span class="n">http_client</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_owns_http_client</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="c1"># Initialize services</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_kg_service</span> <span class="o">=</span> <span class="n">KGService</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_http_client</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cd_service</span> <span class="o">=</span> <span class="n">CDService</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_http_client</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_da_service</span> <span class="o">=</span> <span class="n">DAService</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_http_client</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CausalAIClient.__aenter__">
+<a class="viewcode-back" href="../../api/client.html#causal_ai_sdk.client.CausalAIClient.__aenter__">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="fm">__aenter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Async context manager entry.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            CausalAIClient: Self instance</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Enter HTTP client context if it supports async context manager</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_http_client</span><span class="p">,</span> <span class="s2">&quot;__aenter__&quot;</span><span class="p">):</span>
+            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_http_client</span><span class="o">.</span><span class="fm">__aenter__</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="CausalAIClient.__aexit__">
+<a class="viewcode-back" href="../../api/client.html#causal_ai_sdk.client.CausalAIClient.__aexit__">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="fm">__aexit__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">exc_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Type</span><span class="p">[</span><span class="ne">BaseException</span><span class="p">]],</span>
+        <span class="n">exc_val</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="ne">BaseException</span><span class="p">],</span>
+        <span class="n">exc_tb</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TracebackType</span><span class="p">],</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Async context manager exit.</span>
+
+<span class="sd">        Closes the HTTP client if we own it.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            exc_type (Optional[Type[BaseException]]): Exception type</span>
+<span class="sd">            exc_val (Optional[BaseException]): Exception value</span>
+<span class="sd">            exc_tb (Optional[TracebackType]): Exception traceback</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Exit HTTP client context if it supports async context manager</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_owns_http_client</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_http_client</span><span class="p">,</span> <span class="s2">&quot;__aexit__&quot;</span><span class="p">):</span>
+            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_http_client</span><span class="o">.</span><span class="fm">__aexit__</span><span class="p">(</span><span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_val</span><span class="p">,</span> <span class="n">exc_tb</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_owns_http_client</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_http_client</span><span class="p">,</span> <span class="s2">&quot;aclose&quot;</span><span class="p">):</span>
+            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_http_client</span><span class="o">.</span><span class="n">aclose</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="CausalAIClient.kg">
+<a class="viewcode-back" href="../../api/client.html#causal_ai_sdk.client.CausalAIClient.kg">[docs]</a>
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">kg</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">KGService</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Knowledge Graph service.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            KGService: Knowledge Graph service instance</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_kg_service</span></div>
+
+
+<div class="viewcode-block" id="CausalAIClient.cd">
+<a class="viewcode-back" href="../../api/client.html#causal_ai_sdk.client.CausalAIClient.cd">[docs]</a>
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cd</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CDService</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Causal Discovery service.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            CDService: Causal Discovery service instance</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cd_service</span></div>
+
+
+<div class="viewcode-block" id="CausalAIClient.da">
+<a class="viewcode-back" href="../../api/client.html#causal_ai_sdk.client.CausalAIClient.da">[docs]</a>
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">da</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DAService</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Decision Analysis service.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            DAService: Decision Analysis service instance.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_da_service</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Fujitsu TSU MVPE Engineering Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

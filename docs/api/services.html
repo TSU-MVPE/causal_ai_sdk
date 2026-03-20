@@ -6,14 +6,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Services &mdash; Causal AI Python SDK 1.10.1 Documentation</title>
+  <title>Services &mdash; Causal AI Python SDK 1.18.0 Documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=b95c35c0"></script>
+      <script src="../_static/documentation_options.js?v=256cef93"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -433,15 +433,18 @@ and executing causal discovery tasks.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="causal_ai_sdk.services.cd_service.CDService.delete_matching">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">delete_matching</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_uuid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matching_type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/services/cd_service.html#CDService.delete_matching"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.services.cd_service.CDService.delete_matching" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">delete_matching</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_uuid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matching_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matching_task_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/services/cd_service.html#CDService.delete_matching"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.services.cd_service.CDService.delete_matching" title="Link to this definition"></a></dt>
 <dd><p>Delete matching state and S3 artifacts for a session.</p>
-<p>Corresponds to DELETE /cd/match/{session_uuid}?matching_type=trackr|multica.
+<p>Corresponds to DELETE /cd/match/{session_uuid}
+?matching_type=trackr|multica&amp;matching_task_id=…
 Use after run to clean up matching state.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>session_uuid</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Session UUID</p></li>
 <li><p><strong>matching_type</strong> (<em>Literal</em><em>[</em><em>&quot;trackr&quot;</em><em>, </em><em>&quot;multica&quot;</em><em>]</em>) – Which matching state to delete</p></li>
+<li><p><strong>matching_task_id</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – Matching task ID from start_*_matching
+(required by API)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
@@ -458,11 +461,15 @@ Use after run to clean up matching state.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="causal_ai_sdk.services.cd_service.CDService.delete_multica_matching">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">delete_multica_matching</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_uuid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/services/cd_service.html#CDService.delete_multica_matching"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.services.cd_service.CDService.delete_multica_matching" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">delete_multica_matching</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_uuid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matching_task_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/services/cd_service.html#CDService.delete_multica_matching"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.services.cd_service.CDService.delete_multica_matching" title="Link to this definition"></a></dt>
 <dd><p>Delete MultiCa matching state for the session (convenience for matching_type=multica).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>session_uuid</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Session UUID.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session_uuid</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Session UUID.</p></li>
+<li><p><strong>matching_task_id</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – Matching task ID from start_multica_matching
+(required by API).</p></li>
+</ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
@@ -495,11 +502,15 @@ Use after run to clean up matching state.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="causal_ai_sdk.services.cd_service.CDService.delete_trackr_matching">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">delete_trackr_matching</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_uuid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/services/cd_service.html#CDService.delete_trackr_matching"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.services.cd_service.CDService.delete_trackr_matching" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">delete_trackr_matching</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_uuid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matching_task_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/services/cd_service.html#CDService.delete_trackr_matching"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.services.cd_service.CDService.delete_trackr_matching" title="Link to this definition"></a></dt>
 <dd><p>Delete TraCKR matching state for the session (convenience for matching_type=trackr).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>session_uuid</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Session UUID.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session_uuid</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Session UUID.</p></li>
+<li><p><strong>matching_task_id</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – Matching task ID from start_trackr_matching
+(required by API).</p></li>
+</ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
@@ -566,11 +577,15 @@ Use after run to clean up matching state.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="causal_ai_sdk.services.cd_service.CDService.get_trackr_matching">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_trackr_matching</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_uuid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/services/cd_service.html#CDService.get_trackr_matching"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.services.cd_service.CDService.get_trackr_matching" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_trackr_matching</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_uuid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matching_task_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/services/cd_service.html#CDService.get_trackr_matching"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.services.cd_service.CDService.get_trackr_matching" title="Link to this definition"></a></dt>
 <dd><p>Get TraCKR column matching results.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>session_uuid</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Session UUID</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session_uuid</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Session UUID</p></li>
+<li><p><strong>matching_task_id</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – Matching task ID from start_trackr_matching
+(required by API)</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Matching result with current_matched, knowledge_coverage, etc.</p>
@@ -622,16 +637,18 @@ Use <code class="docutils literal notranslate"><span class="pre">None</span></co
 
 <dl class="py method">
 <dt class="sig sig-object py" id="causal_ai_sdk.services.cd_service.CDService.run_multica">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">run_multica</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uploaded_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">roots</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sinks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/services/cd_service.html#CDService.run_multica"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.services.cd_service.CDService.run_multica" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">run_multica</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uploaded_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matching_task_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">roots</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sinks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/services/cd_service.html#CDService.run_multica"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.services.cd_service.CDService.run_multica" title="Link to this definition"></a></dt>
 <dd><p>Submit a MultiCa causal discovery task.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>uploaded_data</strong> (<em>UploadedData</em>) – From upload_data_for_multica.</p></li>
+<li><p><strong>matching_task_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Matching task ID from start_multica_matching (required).</p></li>
 <li><p><strong>threshold</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>]</em>) – Significance threshold (default: 0.01).
 Use <code class="docutils literal notranslate"><span class="pre">None</span></code> to omit threshold and let backend defaults apply.</p></li>
 <li><p><strong>roots</strong> (<em>Optional</em><em>[</em><em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>]</em>) – Optional list of root variables</p></li>
 <li><p><strong>sinks</strong> (<em>Optional</em><em>[</em><em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>]</em>) – Optional list of sink variables</p></li>
+<li><p><strong>params</strong> (<em>Optional</em><em>[</em><em>Dict</em><em>]</em>) – Optional algorithm params (e.g. max_iter)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -640,12 +657,16 @@ Use <code class="docutils literal notranslate"><span class="pre">None</span></co
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Dict</p>
 </dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="exceptions.html#causal_ai_sdk.exceptions.ValidationError" title="causal_ai_sdk.exceptions.ValidationError"><strong>ValidationError</strong></a> – If the request payload does not align with the
+    contract (400).  # noqa: DAR402</p>
+</dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="causal_ai_sdk.services.cd_service.CDService.run_trackr">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">run_trackr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uploaded_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transferred_knowledge</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/services/cd_service.html#CDService.run_trackr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.services.cd_service.CDService.run_trackr" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">run_trackr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uploaded_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transferred_knowledge</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matching_task_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/services/cd_service.html#CDService.run_trackr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.services.cd_service.CDService.run_trackr" title="Link to this definition"></a></dt>
 <dd><p>Submit a TraCKR causal discovery task with knowledge transfer.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -653,6 +674,7 @@ Use <code class="docutils literal notranslate"><span class="pre">None</span></co
 <li><p><strong>uploaded_data</strong> (<em>UploadedData</em>) – From upload_data_for_trackr.</p></li>
 <li><p><strong>transferred_knowledge</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – Knowledge transfer metadata (required).
 Must contain both “session_uuid” and “kg_id”.</p></li>
+<li><p><strong>matching_task_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Matching task ID from start_trackr_matching (required).</p></li>
 <li><p><strong>threshold</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>]</em>) – Significance threshold (default: 0.01).
 Use <code class="docutils literal notranslate"><span class="pre">None</span></code> to omit threshold and let backend defaults apply.</p></li>
 <li><p><strong>params</strong> (<em>Optional</em><em>[</em><em>Dict</em><em>]</em>) – Optional TraCKR parameters</p></li>
@@ -666,7 +688,8 @@ Use <code class="docutils literal notranslate"><span class="pre">None</span></co
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
-<li><p><a class="reference internal" href="exceptions.html#causal_ai_sdk.exceptions.ValidationError" title="causal_ai_sdk.exceptions.ValidationError"><strong>ValidationError</strong></a> – Missing or invalid transferred_knowledge (400).  # noqa: DAR402</p></li>
+<li><p><a class="reference internal" href="exceptions.html#causal_ai_sdk.exceptions.ValidationError" title="causal_ai_sdk.exceptions.ValidationError"><strong>ValidationError</strong></a> – If the request payload does not align with the
+    contract (400).  # noqa: DAR402</p></li>
 <li><p><a class="reference internal" href="exceptions.html#causal_ai_sdk.exceptions.NotFoundError" title="causal_ai_sdk.exceptions.NotFoundError"><strong>NotFoundError</strong></a> – If the knowledge graph does not exist (404).  # noqa: DAR402</p></li>
 <li><p><a class="reference internal" href="exceptions.html#causal_ai_sdk.exceptions.APIError" title="causal_ai_sdk.exceptions.APIError"><strong>APIError</strong></a> – If KG has no S3 reference or validation fails (500).  # noqa: DAR402</p></li>
 </ul>
@@ -676,40 +699,38 @@ Use <code class="docutils literal notranslate"><span class="pre">None</span></co
 
 <dl class="py method">
 <dt class="sig sig-object py" id="causal_ai_sdk.services.cd_service.CDService.set_multica_matching">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_multica_matching</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_uuid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matching</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/services/cd_service.html#CDService.set_multica_matching"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.services.cd_service.CDService.set_multica_matching" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_multica_matching</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_uuid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matching</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matching_task_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/services/cd_service.html#CDService.set_multica_matching"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.services.cd_service.CDService.set_multica_matching" title="Link to this definition"></a></dt>
 <dd><p>Set/update MultiCa column matching results.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>session_uuid</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Session UUID</p></li>
 <li><p><strong>matching</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – Column mapping (target column -&gt; source column)</p></li>
+<li><p><strong>matching_task_id</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – Matching task ID from start_multica_matching
+(required to update existing)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="causal_ai_sdk.services.cd_service.CDService.set_trackr_matching">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_trackr_matching</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_uuid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matching</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/services/cd_service.html#CDService.set_trackr_matching"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.services.cd_service.CDService.set_trackr_matching" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_trackr_matching</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_uuid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matching</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matching_task_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/services/cd_service.html#CDService.set_trackr_matching"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.services.cd_service.CDService.set_trackr_matching" title="Link to this definition"></a></dt>
 <dd><p>Set/update TraCKR column matching results.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>session_uuid</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Session UUID</p></li>
 <li><p><strong>matching</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – Column mapping (target column -&gt; source column)</p></li>
+<li><p><strong>matching_task_id</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – Matching task ID from start_trackr_matching
+(required to update existing)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -835,7 +856,7 @@ Use <code class="docutils literal notranslate"><span class="pre">None</span></co
 
 <dl class="py method">
 <dt class="sig sig-object py" id="causal_ai_sdk.services.cd_service.CDService.wait_for_matching">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">wait_for_matching</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_uuid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'multica'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/services/cd_service.html#CDService.wait_for_matching"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.services.cd_service.CDService.wait_for_matching" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">wait_for_matching</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_uuid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'multica'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matching_task_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/services/cd_service.html#CDService.wait_for_matching"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.services.cd_service.CDService.wait_for_matching" title="Link to this definition"></a></dt>
 <dd><p>Wait for matching computation to complete (with automatic polling).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -844,6 +865,8 @@ Use <code class="docutils literal notranslate"><span class="pre">None</span></co
 <li><p><strong>mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Matching mode (“multica” or “trackr”, default: “multica”)</p></li>
 <li><p><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – Maximum time to wait in seconds (default: 300)</p></li>
 <li><p><strong>interval</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – Time between polls in seconds (default: 3)</p></li>
+<li><p><strong>matching_task_id</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – Matching task ID from start_*_matching
+(required for API)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -892,13 +915,18 @@ Use <code class="docutils literal notranslate"><span class="pre">None</span></co
 managing column matching, and executing MultiCa causal discovery tasks.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="causal_ai_sdk.services.multica_service.MultiCaService.delete_multica_matching">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">delete_multica_matching</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_uuid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/services/multica_service.html#MultiCaService.delete_multica_matching"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.services.multica_service.MultiCaService.delete_multica_matching" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">delete_multica_matching</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_uuid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matching_task_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/services/multica_service.html#MultiCaService.delete_multica_matching"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.services.multica_service.MultiCaService.delete_multica_matching" title="Link to this definition"></a></dt>
 <dd><p>Delete MultiCa matching state and S3 artifacts for the session.</p>
-<p>Corresponds to DELETE /cd/match/{session_uuid}?matching_type=multica.
+<p>Corresponds to DELETE /cd/match/{session_uuid}
+?matching_type=multica&amp;matching_task_id=…
 Use after run_multica to clean up matching state.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>session_uuid</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Session UUID</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session_uuid</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Session UUID</p></li>
+<li><p><strong>matching_task_id</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – Matching task ID from start_multica_matching
+(required by API)</p></li>
+</ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
@@ -914,11 +942,15 @@ Use after run_multica to clean up matching state.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="causal_ai_sdk.services.multica_service.MultiCaService.get_multica_matching">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_multica_matching</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_uuid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/services/multica_service.html#MultiCaService.get_multica_matching"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.services.multica_service.MultiCaService.get_multica_matching" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_multica_matching</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_uuid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matching_task_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/services/multica_service.html#MultiCaService.get_multica_matching"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.services.multica_service.MultiCaService.get_multica_matching" title="Link to this definition"></a></dt>
 <dd><p>Get MultiCa column matching results.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>session_uuid</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Session UUID</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session_uuid</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Session UUID</p></li>
+<li><p><strong>matching_task_id</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – Matching task ID from start_multica_matching
+(required by API)</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Matching result with current_matched, match_rate, etc.</p>
@@ -931,16 +963,18 @@ Use after run_multica to clean up matching state.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="causal_ai_sdk.services.multica_service.MultiCaService.run_multica">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">run_multica</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uploaded_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">roots</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sinks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/services/multica_service.html#MultiCaService.run_multica"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.services.multica_service.MultiCaService.run_multica" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">run_multica</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uploaded_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matching_task_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">roots</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sinks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/services/multica_service.html#MultiCaService.run_multica"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.services.multica_service.MultiCaService.run_multica" title="Link to this definition"></a></dt>
 <dd><p>Submit a MultiCa causal discovery task.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>uploaded_data</strong> (<em>UploadedData</em>) – From upload_data_for_multica.</p></li>
+<li><p><strong>matching_task_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Matching task ID from start_multica_matching (required).</p></li>
 <li><p><strong>threshold</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>]</em>) – Significance threshold (default: 0.01).
 Use <code class="docutils literal notranslate"><span class="pre">None</span></code> to omit threshold and let backend defaults apply.</p></li>
 <li><p><strong>roots</strong> (<em>Optional</em><em>[</em><em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>]</em>) – Optional list of root variables</p></li>
 <li><p><strong>sinks</strong> (<em>Optional</em><em>[</em><em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>]</em>) – Optional list of sink variables</p></li>
+<li><p><strong>params</strong> (<em>Optional</em><em>[</em><em>Dict</em><em>]</em>) – Optional algorithm params (e.g. max_iter)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -949,24 +983,27 @@ Use <code class="docutils literal notranslate"><span class="pre">None</span></co
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Dict</p>
 </dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="exceptions.html#causal_ai_sdk.exceptions.ValidationError" title="causal_ai_sdk.exceptions.ValidationError"><strong>ValidationError</strong></a> – If the request payload does not align with the contract (400).</p>
+</dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="causal_ai_sdk.services.multica_service.MultiCaService.set_multica_matching">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_multica_matching</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_uuid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matching</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/services/multica_service.html#MultiCaService.set_multica_matching"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.services.multica_service.MultiCaService.set_multica_matching" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_multica_matching</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_uuid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matching</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matching_task_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/services/multica_service.html#MultiCaService.set_multica_matching"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.services.multica_service.MultiCaService.set_multica_matching" title="Link to this definition"></a></dt>
 <dd><p>Set/update MultiCa column matching results (update of existing state).</p>
-<p>Used to update an existing matching state. The API requires matching to be
-a non-empty dict. When creating a new state, the API requires
-datasets_columns and matching must contain a key for every column in
-datasets_columns (use “” for no match). On 400, response_data may
-contain “missing_keys” or “error”.</p>
+<p>Used to update an existing matching state. Pass matching_task_id from
+start_multica_matching to update that matching. The API requires matching
+to be a non-empty dict.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>session_uuid</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Session UUID</p></li>
 <li><p><strong>matching</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – Column mapping (target column -&gt; source column).
 Must be non-empty. Use “” for columns with no match.</p></li>
+<li><p><strong>matching_task_id</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – Matching task ID from start_multica_matching
+(required to update existing).</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
@@ -1026,7 +1063,7 @@ Must be non-empty. Use “” for columns with no match.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="causal_ai_sdk.services.multica_service.MultiCaService.wait_for_matching">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">wait_for_matching</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_uuid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/services/multica_service.html#MultiCaService.wait_for_matching"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.services.multica_service.MultiCaService.wait_for_matching" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">wait_for_matching</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_uuid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matching_task_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/services/multica_service.html#MultiCaService.wait_for_matching"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.services.multica_service.MultiCaService.wait_for_matching" title="Link to this definition"></a></dt>
 <dd><p>Wait for MultiCa matching computation to complete (with automatic polling).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1034,6 +1071,8 @@ Must be non-empty. Use “” for columns with no match.</p></li>
 <li><p><strong>session_uuid</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Session UUID</p></li>
 <li><p><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – Maximum time to wait in seconds (default: 300)</p></li>
 <li><p><strong>interval</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – Time between polls in seconds (default: 3)</p></li>
+<li><p><strong>matching_task_id</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – Matching task ID from start_multica_matching
+(required by API)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -1114,13 +1153,18 @@ Use None to omit and let backend defaults apply; if set, must be in (0, 1].</p><
 managing column matching, and executing TraCKR causal discovery tasks.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="causal_ai_sdk.services.trackr_service.TraCKRService.delete_trackr_matching">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">delete_trackr_matching</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_uuid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/services/trackr_service.html#TraCKRService.delete_trackr_matching"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.services.trackr_service.TraCKRService.delete_trackr_matching" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">delete_trackr_matching</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_uuid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matching_task_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/services/trackr_service.html#TraCKRService.delete_trackr_matching"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.services.trackr_service.TraCKRService.delete_trackr_matching" title="Link to this definition"></a></dt>
 <dd><p>Delete TraCKR matching state and S3 artifacts for the session.</p>
-<p>Corresponds to DELETE /cd/match/{session_uuid}?matching_type=trackr.
+<p>Corresponds to DELETE /cd/match/{session_uuid}
+?matching_type=trackr&amp;matching_task_id=…
 Use after run_trackr to clean up matching state.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>session_uuid</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Session UUID</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session_uuid</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Session UUID</p></li>
+<li><p><strong>matching_task_id</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – Matching task ID from start_trackr_matching
+(required by API)</p></li>
+</ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
@@ -1136,11 +1180,15 @@ Use after run_trackr to clean up matching state.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="causal_ai_sdk.services.trackr_service.TraCKRService.get_trackr_matching">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_trackr_matching</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_uuid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/services/trackr_service.html#TraCKRService.get_trackr_matching"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.services.trackr_service.TraCKRService.get_trackr_matching" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_trackr_matching</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_uuid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matching_task_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/services/trackr_service.html#TraCKRService.get_trackr_matching"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.services.trackr_service.TraCKRService.get_trackr_matching" title="Link to this definition"></a></dt>
 <dd><p>Get TraCKR column matching results.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>session_uuid</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Session UUID</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session_uuid</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Session UUID</p></li>
+<li><p><strong>matching_task_id</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – Matching task ID from start_trackr_matching
+(required by API)</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Matching result with current_matched, knowledge_coverage, etc.</p>
@@ -1153,7 +1201,7 @@ Use after run_trackr to clean up matching state.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="causal_ai_sdk.services.trackr_service.TraCKRService.run_trackr">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">run_trackr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uploaded_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transferred_knowledge</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/services/trackr_service.html#TraCKRService.run_trackr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.services.trackr_service.TraCKRService.run_trackr" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">run_trackr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uploaded_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transferred_knowledge</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matching_task_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/services/trackr_service.html#TraCKRService.run_trackr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.services.trackr_service.TraCKRService.run_trackr" title="Link to this definition"></a></dt>
 <dd><p>Submit a TraCKR causal discovery task with knowledge transfer.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1161,6 +1209,7 @@ Use after run_trackr to clean up matching state.</p>
 <li><p><strong>uploaded_data</strong> (<em>UploadedData</em>) – From upload_data_for_trackr.</p></li>
 <li><p><strong>transferred_knowledge</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – Knowledge transfer metadata (required).
 Must contain both “session_uuid” and “kg_id”.</p></li>
+<li><p><strong>matching_task_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Matching task ID from start_trackr_matching (required).</p></li>
 <li><p><strong>threshold</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>]</em>) – Significance threshold (default: 0.01).
 Use <code class="docutils literal notranslate"><span class="pre">None</span></code> to omit threshold and let backend defaults apply.</p></li>
 <li><p><strong>params</strong> (<em>Optional</em><em>[</em><em>Dict</em><em>]</em>) – Optional TraCKR parameters</p></li>
@@ -1174,7 +1223,7 @@ Use <code class="docutils literal notranslate"><span class="pre">None</span></co
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
-<li><p><a class="reference internal" href="exceptions.html#causal_ai_sdk.exceptions.ValidationError" title="causal_ai_sdk.exceptions.ValidationError"><strong>ValidationError</strong></a> – If transferred_knowledge is missing or lacks session_uuid/kg_id (400).</p></li>
+<li><p><a class="reference internal" href="exceptions.html#causal_ai_sdk.exceptions.ValidationError" title="causal_ai_sdk.exceptions.ValidationError"><strong>ValidationError</strong></a> – If the request payload does not align with the contract (400).</p></li>
 <li><p><a class="reference internal" href="exceptions.html#causal_ai_sdk.exceptions.NotFoundError" title="causal_ai_sdk.exceptions.NotFoundError"><strong>NotFoundError</strong></a> – If the knowledge graph does not exist (404).  # noqa: DAR402</p></li>
 <li><p><a class="reference internal" href="exceptions.html#causal_ai_sdk.exceptions.APIError" title="causal_ai_sdk.exceptions.APIError"><strong>APIError</strong></a> – If KG has no S3 reference or validation fails (500).  # noqa: DAR402</p></li>
 </ul>
@@ -1184,23 +1233,22 @@ Use <code class="docutils literal notranslate"><span class="pre">None</span></co
 
 <dl class="py method">
 <dt class="sig sig-object py" id="causal_ai_sdk.services.trackr_service.TraCKRService.set_trackr_matching">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_trackr_matching</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_uuid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matching</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/services/trackr_service.html#TraCKRService.set_trackr_matching"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.services.trackr_service.TraCKRService.set_trackr_matching" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_trackr_matching</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_uuid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matching</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matching_task_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/services/trackr_service.html#TraCKRService.set_trackr_matching"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.services.trackr_service.TraCKRService.set_trackr_matching" title="Link to this definition"></a></dt>
 <dd><p>Set/update TraCKR column matching results (update of existing state).</p>
-<p>Used to update an existing matching state. The API requires matching to be
-a non-empty dict. When creating a new state (no prior matching), the API
-requires target_columns, source_columns, source_kg_id and matching must
-contain a key for every target column (use “” for no match).</p>
+<p>Pass matching_task_id from start_trackr_matching to update that matching.
+The API requires matching to be a non-empty dict.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>session_uuid</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Session UUID</p></li>
 <li><p><strong>matching</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – Column mapping (target column -&gt; source column).
 Must be non-empty. Use “” for target columns with no match.</p></li>
+<li><p><strong>matching_task_id</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – Matching task ID from start_trackr_matching
+(required to update existing)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="exceptions.html#causal_ai_sdk.exceptions.ValidationError" title="causal_ai_sdk.exceptions.ValidationError"><strong>ValidationError</strong></a> – If matching is empty (400). On API 400, response_data
-    may contain “missing_keys” or “error”.</p>
+<dd class="field-even"><p><a class="reference internal" href="exceptions.html#causal_ai_sdk.exceptions.ValidationError" title="causal_ai_sdk.exceptions.ValidationError"><strong>ValidationError</strong></a> – If matching is empty (400).</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
@@ -1258,7 +1306,7 @@ Must be non-empty. Use “” for target columns with no match.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="causal_ai_sdk.services.trackr_service.TraCKRService.wait_for_matching">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">wait_for_matching</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_uuid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/services/trackr_service.html#TraCKRService.wait_for_matching"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.services.trackr_service.TraCKRService.wait_for_matching" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">wait_for_matching</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_uuid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matching_task_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/services/trackr_service.html#TraCKRService.wait_for_matching"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.services.trackr_service.TraCKRService.wait_for_matching" title="Link to this definition"></a></dt>
 <dd><p>Wait for TraCKR matching computation to complete (with automatic polling).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1266,6 +1314,8 @@ Must be non-empty. Use “” for target columns with no match.</p></li>
 <li><p><strong>session_uuid</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Session UUID</p></li>
 <li><p><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – Maximum time to wait in seconds (default: 300)</p></li>
 <li><p><strong>interval</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – Time between polls in seconds (default: 3)</p></li>
+<li><p><strong>matching_task_id</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – Matching task ID from start_trackr_matching
+(required by API)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>

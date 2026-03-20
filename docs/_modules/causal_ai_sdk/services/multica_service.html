@@ -5,14 +5,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>causal_ai_sdk.services.multica_service &mdash; Causal AI Python SDK 1.10.1 Documentation</title>
+  <title>causal_ai_sdk.services.multica_service &mdash; Causal AI Python SDK 1.18.0 Documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
 
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=b95c35c0"></script>
+      <script src="../../../_static/documentation_options.js?v=256cef93"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -236,6 +236,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">causal_ai_sdk.services.base_cd_service</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseCDService</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">causal_ai_sdk.utils.dataset_schema</span><span class="w"> </span><span class="kn">import</span> <span class="n">validate_columns_data</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">causal_ai_sdk.utils.polling</span><span class="w"> </span><span class="kn">import</span> <span class="n">poll_until_ready_or_fail</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">ValidationError</span> <span class="k">as</span> <span class="n">PydanticValidationError</span>
 
 
 <div class="viewcode-block" id="MultiCaService">
@@ -427,6 +428,7 @@
         <span class="n">session_uuid</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">300</span><span class="p">,</span>
         <span class="n">interval</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="n">matching_task_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Wait for MultiCa matching computation to complete (with automatic polling).</span>
 
@@ -434,13 +436,15 @@
 <span class="sd">            session_uuid (str): Session UUID</span>
 <span class="sd">            timeout (int): Maximum time to wait in seconds (default: 300)</span>
 <span class="sd">            interval (int): Time between polls in seconds (default: 3)</span>
+<span class="sd">            matching_task_id (Optional[str]): Matching task ID from start_multica_matching</span>
+<span class="sd">                (required by API)</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Dict: Final matching result</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">check</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-            <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_multica_matching</span><span class="p">(</span><span class="n">session_uuid</span><span class="p">)</span>
+            <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_multica_matching</span><span class="p">(</span><span class="n">session_uuid</span><span class="p">,</span> <span class="n">matching_task_id</span><span class="p">)</span>
 
         <span class="k">def</span><span class="w"> </span><span class="nf">on_failed</span><span class="p">(</span><span class="n">result</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">error_msg</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;Unknown error&quot;</span>
@@ -495,35 +499,45 @@
 
 <div class="viewcode-block" id="MultiCaService.get_multica_matching">
 <a class="viewcode-back" href="../../../api/services.html#causal_ai_sdk.services.multica_service.MultiCaService.get_multica_matching">[docs]</a>
-    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_multica_matching</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session_uuid</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_multica_matching</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">session_uuid</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">matching_task_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get MultiCa column matching results.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            session_uuid (str): Session UUID</span>
+<span class="sd">            matching_task_id (Optional[str]): Matching task ID from start_multica_matching</span>
+<span class="sd">                (required by API)</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Dict: Matching result with current_matched, match_rate, etc.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contract_path</span><span class="p">(</span><span class="s2">&quot;cd.get_multica_matching&quot;</span><span class="p">,</span> <span class="n">uuid</span><span class="o">=</span><span class="n">session_uuid</span><span class="p">)</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_request</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;matching_task_id&quot;</span><span class="p">:</span> <span class="n">matching_task_id</span><span class="p">}</span> <span class="k">if</span> <span class="n">matching_task_id</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_request</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">response</span></div>
 
 
 <div class="viewcode-block" id="MultiCaService.set_multica_matching">
 <a class="viewcode-back" href="../../../api/services.html#causal_ai_sdk.services.multica_service.MultiCaService.set_multica_matching">[docs]</a>
-    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">set_multica_matching</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session_uuid</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">matching</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">set_multica_matching</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">session_uuid</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">matching</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
+        <span class="n">matching_task_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set/update MultiCa column matching results (update of existing state).</span>
 
-<span class="sd">        Used to update an existing matching state. The API requires matching to be</span>
-<span class="sd">        a non-empty dict. When creating a new state, the API requires</span>
-<span class="sd">        datasets_columns and matching must contain a key for every column in</span>
-<span class="sd">        datasets_columns (use &quot;&quot; for no match). On 400, response_data may</span>
-<span class="sd">        contain &quot;missing_keys&quot; or &quot;error&quot;.</span>
+<span class="sd">        Used to update an existing matching state. Pass matching_task_id from</span>
+<span class="sd">        start_multica_matching to update that matching. The API requires matching</span>
+<span class="sd">        to be a non-empty dict.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            session_uuid (str): Session UUID</span>
 <span class="sd">            matching (Dict[str, str]): Column mapping (target column -&gt; source column).</span>
 <span class="sd">                Must be non-empty. Use &quot;&quot; for columns with no match.</span>
+<span class="sd">            matching_task_id (Optional[str]): Matching task ID from start_multica_matching</span>
+<span class="sd">                (required to update existing).</span>
 
 <span class="sd">        Raises:</span>
 <span class="sd">            ValidationError: If matching is empty (400).</span>
@@ -535,8 +549,8 @@
                 <span class="n">response_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contract_path</span><span class="p">(</span><span class="s2">&quot;cd.set_multica_matching&quot;</span><span class="p">,</span> <span class="n">uuid</span><span class="o">=</span><span class="n">session_uuid</span><span class="p">)</span>
-        <span class="n">payload</span> <span class="o">=</span> <span class="n">CDMatchSetRequestContract</span><span class="p">(</span><span class="n">matching</span><span class="o">=</span><span class="n">matching</span><span class="p">)</span>
-        <span class="n">json_data</span> <span class="o">=</span> <span class="n">payload</span><span class="o">.</span><span class="n">model_dump</span><span class="p">()</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">CDMatchSetRequestContract</span><span class="p">(</span><span class="n">matching</span><span class="o">=</span><span class="n">matching</span><span class="p">,</span> <span class="n">matching_task_id</span><span class="o">=</span><span class="n">matching_task_id</span><span class="p">)</span>
+        <span class="n">json_data</span> <span class="o">=</span> <span class="n">payload</span><span class="o">.</span><span class="n">model_dump</span><span class="p">(</span><span class="n">exclude_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">json_data</span><span class="o">=</span><span class="n">json_data</span><span class="p">)</span></div>
 
 
@@ -545,52 +559,73 @@
     <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">run_multica</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">uploaded_data</span><span class="p">:</span> <span class="n">UploadedData</span><span class="p">,</span>
+        <span class="n">matching_task_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">threshold</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span>
         <span class="n">roots</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">sinks</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Submit a MultiCa causal discovery task.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            uploaded_data (UploadedData): From upload_data_for_multica.</span>
+<span class="sd">            matching_task_id (str): Matching task ID from start_multica_matching (required).</span>
 <span class="sd">            threshold (Optional[float]): Significance threshold (default: 0.01).</span>
 <span class="sd">                Use ``None`` to omit threshold and let backend defaults apply.</span>
 <span class="sd">            roots (Optional[List[str]]): Optional list of root variables</span>
 <span class="sd">            sinks (Optional[List[str]]): Optional list of sink variables</span>
+<span class="sd">            params (Optional[Dict]): Optional algorithm params (e.g. max_iter)</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Dict: Task response (status: queued)</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValidationError: If the request payload does not align with the contract (400).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">ref</span> <span class="o">=</span> <span class="n">uploaded_data</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">payload</span> <span class="o">=</span> <span class="n">CDMulticaRunRequestContract</span><span class="p">(</span>
+                <span class="n">task_id</span><span class="o">=</span><span class="n">ref</span><span class="o">.</span><span class="n">task_id</span><span class="p">,</span>
+                <span class="n">s3_key</span><span class="o">=</span><span class="n">ref</span><span class="o">.</span><span class="n">s3_key</span><span class="p">,</span>
+                <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">,</span>
+                <span class="n">roots</span><span class="o">=</span><span class="n">roots</span><span class="p">,</span>
+                <span class="n">sinks</span><span class="o">=</span><span class="n">sinks</span><span class="p">,</span>
+                <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+                <span class="n">matching_task_id</span><span class="o">=</span><span class="n">matching_task_id</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">except</span> <span class="n">PydanticValidationError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span>
+                <span class="n">message</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span>
+                <span class="n">status_code</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span>
+                <span class="n">response_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
         <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contract_path</span><span class="p">(</span><span class="s2">&quot;cd.run_multica&quot;</span><span class="p">,</span> <span class="n">uuid</span><span class="o">=</span><span class="n">ref</span><span class="o">.</span><span class="n">session_uuid</span><span class="p">)</span>
-        <span class="n">payload</span> <span class="o">=</span> <span class="n">CDMulticaRunRequestContract</span><span class="p">(</span>
-            <span class="n">task_id</span><span class="o">=</span><span class="n">ref</span><span class="o">.</span><span class="n">task_id</span><span class="p">,</span>
-            <span class="n">s3_key</span><span class="o">=</span><span class="n">ref</span><span class="o">.</span><span class="n">s3_key</span><span class="p">,</span>
-            <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">,</span>
-            <span class="n">roots</span><span class="o">=</span><span class="n">roots</span><span class="p">,</span>
-            <span class="n">sinks</span><span class="o">=</span><span class="n">sinks</span><span class="p">,</span>
-        <span class="p">)</span>
-        <span class="n">json_data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="n">payload</span><span class="o">.</span><span class="n">model_dump</span><span class="p">(</span><span class="n">exclude_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">json_data</span> <span class="o">=</span> <span class="n">payload</span><span class="o">.</span><span class="n">model_dump</span><span class="p">(</span><span class="n">exclude_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">json_data</span><span class="o">=</span><span class="n">json_data</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">response</span></div>
 
 
 <div class="viewcode-block" id="MultiCaService.delete_multica_matching">
 <a class="viewcode-back" href="../../../api/services.html#causal_ai_sdk.services.multica_service.MultiCaService.delete_multica_matching">[docs]</a>
-    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">delete_multica_matching</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session_uuid</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">delete_multica_matching</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">session_uuid</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">matching_task_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Delete MultiCa matching state and S3 artifacts for the session.</span>
 
-<span class="sd">        Corresponds to DELETE /cd/match/{session_uuid}?matching_type=multica.</span>
+<span class="sd">        Corresponds to DELETE /cd/match/{session_uuid}</span>
+<span class="sd">        ?matching_type=multica&amp;matching_task_id=...</span>
 <span class="sd">        Use after run_multica to clean up matching state.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            session_uuid (str): Session UUID</span>
+<span class="sd">            matching_task_id (Optional[str]): Matching task ID from start_multica_matching</span>
+<span class="sd">                (required by API)</span>
 
 <span class="sd">        Raises:</span>
 <span class="sd">            NotFoundError: If matching state does not exist (404).  # noqa: DAR402</span>
 <span class="sd">            APIError: If matching is still pending (409).  # noqa: DAR402</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">delete_matching</span><span class="p">(</span><span class="n">session_uuid</span><span class="p">,</span> <span class="s2">&quot;multica&quot;</span><span class="p">)</span></div>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">delete_matching</span><span class="p">(</span><span class="n">session_uuid</span><span class="p">,</span> <span class="s2">&quot;multica&quot;</span><span class="p">,</span> <span class="n">matching_task_id</span><span class="p">)</span></div>
 </div>
 
 </pre></div>

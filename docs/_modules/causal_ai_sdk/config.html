@@ -5,14 +5,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>causal_ai_sdk.config &mdash; Causal AI Python SDK 1.10.1 Documentation</title>
+  <title>causal_ai_sdk.config &mdash; Causal AI Python SDK 1.18.0 Documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
 
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=b95c35c0"></script>
+      <script src="../../_static/documentation_options.js?v=256cef93"></script>
       <script src="../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -238,7 +238,7 @@
 <span class="sd">            from CAUSAL_AI_API_KEY environment variable.</span>
 <span class="sd">        base_url: Base URL of the API Gateway. If not provided, will try to read</span>
 <span class="sd">            from CAUSAL_AI_BASE_URL environment variable.</span>
-<span class="sd">        timeout: Request timeout in seconds. Defaults to 30.</span>
+<span class="sd">        timeout: Request timeout in seconds. Defaults to 120.</span>
 <span class="sd">        **kwargs: Additional configuration options.</span>
 
 <span class="sd">    Raises:</span>
@@ -262,7 +262,7 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">api_key</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">base_url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span>
+        <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">120</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize Config instance.</span>

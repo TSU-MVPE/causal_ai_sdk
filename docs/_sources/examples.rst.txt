@@ -4,6 +4,13 @@ Examples
 The SDK is used as an async context manager. All service calls go through
 ``client.kg``, ``client.cd``, or ``client.da``.
 
+Adjacency orientation contract:
+
+- Knowledge Graph ``data`` uses ``cause=row, effect=col``.
+- CD result ``adjacency_matrices`` uses ``cause=row, effect=col``.
+- ``adjacency_matrices[i][j] != 0`` means ``feature_names[i]`` causes ``feature_names[j]``.
+- DA converts to Cation's internal ``effect=row, cause=col`` at ingest.
+
 Knowledge Graph
 ---------------
 
@@ -26,8 +33,10 @@ Causal Discovery (MultiCa)
 --------------------------
 
 Upload multiple datasets with ``upload_data_for_multica`` (or use ``get_upload_url``
-for a presigned URL and upload yourself), then run MultiCa with optional roots/sinks.
-Poll until complete and fetch the result:
+for a presigned URL and upload yourself). Start matching, then pass the returned
+``matching_task_id`` into ``wait_for_matching``, ``run_multica``, and (for cleanup)
+``delete_multica_matching``. Use the **run** task id from ``run_multica`` for
+``wait_for_task`` and ``get_task_result``:
 
 .. code-block:: python
 
@@ -36,17 +45,29 @@ Poll until complete and fetch the result:
        uploaded = await client.cd.upload_data_for_multica(
            session["uuid"], ["dataset1.csv", "dataset2.csv"]
        )
-       task = await client.cd.run_multica(
-           uploaded, threshold=0.01, roots=["X1"], sinks=["Y"]
+       matching = await client.cd.start_multica_matching(uploaded)
+       matching_task_id = matching["matching_task_id"]
+       await client.cd.wait_for_matching(
+           session["uuid"], mode="multica",
+           matching_task_id=matching_task_id, timeout=300, interval=3
        )
-       status = await client.cd.wait_for_task(uploaded, timeout=300, interval=5)
-       result = await client.cd.get_task_result(session["uuid"], task["task_id"])
+       task = await client.cd.run_multica(
+           uploaded, threshold=0.01, roots=["X1"], sinks=["Y"],
+           matching_task_id=matching_task_id
+       )
+       run_task_id = task["task_id"]
+       await client.cd.wait_for_task(
+           run_task_id, session_uuid=session["uuid"], timeout=300, interval=5
+       )
+       result = await client.cd.get_task_result(session["uuid"], run_task_id)
+       # Cleanup: await client.cd.delete_multica_matching(session["uuid"], matching_task_id)
 
 Causal Discovery (LiNGAM)
 -------------------------
 
 Upload a single dataset, run LiNGAM causal discovery, wait for completion, and
-fetch the result:
+fetch the result. Use the **run** task id from ``run_lingam`` for
+``wait_for_task`` and ``get_task_result`` (not the upload task id):
 
 .. code-block:: python
 
@@ -54,15 +75,21 @@ fetch the result:
        session = await client.kg.init_session()
        uploaded = await client.cd.upload_data_for_lingam(session["uuid"], "data.csv")
        task = await client.cd.run_lingam(uploaded, threshold=0.01)
-       await client.cd.wait_for_task(uploaded, timeout=600, interval=5)
-       task_result = await client.cd.get_task_result(session["uuid"], task["task_id"])
+       run_task_id = task["task_id"]
+       await client.cd.wait_for_task(
+           run_task_id, session_uuid=session["uuid"], timeout=600, interval=5
+       )
+       task_result = await client.cd.get_task_result(session["uuid"], run_task_id)
        # task_result contains result_url; fetch JSON from it for feature_names, etc.
 
 Causal Discovery (TraCKR)
 -------------------------
 
-Upload a source knowledge graph, upload target data, run TraCKR matching, then
-run TraCKR CD with knowledge transfer. Wait for completion and fetch the result:
+Upload a source knowledge graph, upload target data, start TraCKR matching and
+pass the returned ``matching_task_id`` into ``wait_for_matching``, optional
+``set_trackr_matching``, ``run_trackr``, and (for cleanup) ``delete_trackr_matching``.
+Use the **run** task id from ``run_trackr`` for ``wait_for_task`` and
+``get_task_result``:
 
 .. code-block:: python
 
@@ -72,18 +99,27 @@ run TraCKR CD with knowledge transfer. Wait for completion and fetch the result:
            session_uuid=session["uuid"], file_path="source_graph.json"
        )
        uploaded = await client.cd.upload_data_for_trackr(session["uuid"], "target.csv")
-       await client.cd.start_trackr_matching(uploaded, source_kg_id=kg["id"])
-       matching = await client.cd.wait_for_matching(
-           session["uuid"], mode="trackr", timeout=300, interval=3
+       matching_start = await client.cd.start_trackr_matching(uploaded, source_kg_id=kg["id"])
+       matching_task_id = matching_start["matching_task_id"]
+       await client.cd.wait_for_matching(
+           session["uuid"], mode="trackr",
+           matching_task_id=matching_task_id, timeout=300, interval=3
        )
-       # Optionally adjust: await client.cd.set_trackr_matching(session["uuid"], {...})
+       # Optionally: await client.cd.set_trackr_matching(
+       #     session["uuid"], {"col_a": "src_a"}, matching_task_id=matching_task_id
+       # )
        task = await client.cd.run_trackr(
            uploaded,
            transferred_knowledge={"session_uuid": session["uuid"], "kg_id": kg["id"]},
            threshold=0.01,
+           matching_task_id=matching_task_id,
        )
-       await client.cd.wait_for_task(uploaded, timeout=300, interval=5)
-       result = await client.cd.get_task_result(session["uuid"], task["task_id"])
+       run_task_id = task["task_id"]
+       await client.cd.wait_for_task(
+           run_task_id, session_uuid=session["uuid"], timeout=300, interval=5
+       )
+       result = await client.cd.get_task_result(session["uuid"], run_task_id)
+       # Cleanup: await client.cd.delete_trackr_matching(session["uuid"], matching_task_id)
 
 Decision Analysis
 -----------------
@@ -128,8 +164,8 @@ the repository:
 Column matching (MultiCa)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Upload data, start MultiCa column matching, wait for it to complete, then run MultiCa
-using the same session (and optionally set or inspect the matching).
+Upload data, start MultiCa column matching, then pass ``matching_task_id`` through
+wait, set, run, and delete. Use the run task id for wait/get result.
 
 .. code-block:: python
 
@@ -144,9 +180,23 @@ using the same session (and optionally set or inspect the matching).
            session_uuid=session["uuid"],
            s3_key=upload_info.s3_key,
        )
-       await client.cd.start_multica_matching(uploaded)
-       matching = await client.cd.wait_for_matching(session["uuid"], mode="multica")
-       # Optionally: client.cd.set_multica_matching(session["uuid"], {"col_a": "src_a"})
-       task = await client.cd.run_multica(uploaded, threshold=0.01)
+       matching = await client.cd.start_multica_matching(uploaded)
+       matching_task_id = matching["matching_task_id"]
+       await client.cd.wait_for_matching(
+           session["uuid"], mode="multica",
+           matching_task_id=matching_task_id, timeout=300, interval=3
+       )
+       # Optionally: client.cd.set_multica_matching(
+       #     session["uuid"], {"col_a": "src_a"}, matching_task_id=matching_task_id
+       # )
+       task = await client.cd.run_multica(
+           uploaded, threshold=0.01, matching_task_id=matching_task_id
+       )
+       run_task_id = task["task_id"]
+       await client.cd.wait_for_task(
+           run_task_id, session_uuid=session["uuid"], timeout=300, interval=5
+       )
+       result = await client.cd.get_task_result(session["uuid"], run_task_id)
+       # Cleanup: await client.cd.delete_multica_matching(session["uuid"], matching_task_id)
 
 More examples (scripts) live in the repository under ``examples/``.

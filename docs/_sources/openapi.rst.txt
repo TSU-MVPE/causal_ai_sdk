@@ -1,0 +1,15 @@
+OpenAPI specification
+======================
+
+.. raw:: html
+
+   <p>
+   <a href="_static/openapi-doc.html" target="_blank" rel="noopener noreferrer">Open OpenAPI in full page</a>
+   &nbsp;|&nbsp;
+   <a href="_static/openapi.json" download="openapi.json">Download openapi.json</a>
+   </p>
+   <iframe
+     src="_static/openapi-doc.html"
+     title="OpenAPI Documentation (ReDoc)"
+     style="width: 100%; height: calc(100vh - 220px); min-height: 900px; border: 1px solid #e1e4e5; border-radius: 4px;"
+   ></iframe>

@@ -1,0 +1,5488 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Causal AI MVP API",
+    "version": "1.17.1",
+    "description": "Generated from Terraform routes and Pydantic models in scripts/openapi_models.py."
+  },
+  "paths": {
+    "/kg/init": {
+      "post": {
+        "operationId": "kg_init_post",
+        "tags": [
+          "KG 01 Init",
+          "Flow: LiNGAM",
+          "Flow: TraCKR + KG",
+          "Flow: MultiCa"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KGInitResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Initialize knowledge graph session",
+        "description": "Create a new KG session UUID. This UUID is reused by KG and CD endpoints to keep data and tasks in the same tenant/session scope.",
+        "x-related-endpoints": [
+          "/kg/upload-url/{uuid}",
+          "/kg/add/{uuid}",
+          "/cd/lingam/run/{uuid}",
+          "/cd/multica/run/{uuid}",
+          "/cd/trackr/match/{uuid}",
+          "/cd/trackr/run/{uuid}"
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/kg/upload-url/{uuid}": {
+      "post": {
+        "operationId": "kg_upload_url_uuid_post",
+        "tags": [
+          "KG 02 Upload",
+          "Flow: TraCKR + KG"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KGUploadUrlResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create KG upload URL",
+        "description": "Return a pre-signed URL for uploading KG source data before calling /kg/add/{uuid}.",
+        "x-related-endpoints": [
+          "/kg/add/{uuid}"
+        ],
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/KGUploadUrlRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/kg/add/{uuid}": {
+      "post": {
+        "operationId": "kg_add_uuid_post",
+        "tags": [
+          "KG 03 Add",
+          "Flow: TraCKR + KG"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KGAddResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Register KG metadata and get kg_id",
+        "description": "Register an uploaded KG file in the current session and return kg_id. The returned kg_id is used by TraCKR endpoints via source_kg_id or transferred_knowledge.kg_id.",
+        "x-related-endpoints": [
+          "/kg/graph/{uuid}",
+          "/cd/trackr/match/{uuid}",
+          "/cd/trackr/run/{uuid}"
+        ],
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/KGAddRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cd/upload-url/{uuid}": {
+      "post": {
+        "operationId": "cd_upload_url_uuid_post",
+        "tags": [
+          "CD Common 01 Upload",
+          "Flow: LiNGAM",
+          "Flow: TraCKR + KG",
+          "Flow: MultiCa"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CDUploadUrlResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create CD upload URL",
+        "description": "Return a pre-signed URL for uploading CD input data before calling algorithm run endpoints such as /cd/lingam/run/{uuid}, /cd/trackr/run/{uuid}, or /cd/multica/run/{uuid}.\n\nSupported upload content types:\n- application/json (canonical dataset payload)\n- text/csv (single dataset CSV; for trackr/lingam)\n- application/zip (MultiCa: one or more .csv files in a ZIP)\nNote: MultiCa accepts JSON or ZIP input; non-JSON MultiCa input must be ZIP.",
+        "x-related-endpoints": [
+          "/cd/lingam/run/{uuid}",
+          "/cd/trackr/run/{uuid}",
+          "/cd/multica/run/{uuid}"
+        ],
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      },
+      "options": {
+        "operationId": "cd_upload_url_uuid_options",
+        "tags": [
+          "CD Common 01 Upload"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/cd/lingam/run/{uuid}": {
+      "post": {
+        "operationId": "cd_lingam_run_uuid_post",
+        "tags": [
+          "CD LiNGAM 04 Run",
+          "Flow: LiNGAM",
+          "CD LiNGAM 02 Run"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CDQueuedResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Run LayeredLiNGAM (session-scoped)",
+        "description": "Queue a LayeredLiNGAM run using uploaded CD input data in the same session (session is initialized by /kg/init). This endpoint does not require matching or transferred_knowledge.",
+        "x-related-endpoints": [
+          "/cd/upload-url/{uuid}",
+          "/cd/status/{uuid}",
+          "/cd/result/{uuid}"
+        ],
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CDLingamRunRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cd/trackr/match/{uuid}": {
+      "post": {
+        "operationId": "cd_trackr_match_uuid_post",
+        "tags": [
+          "CD TraCKR 02 Match",
+          "Flow: TraCKR + KG"
+        ],
+        "responses": {
+          "202": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CDMatchStartResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Start TraCKR matching (depends on KG)",
+        "description": "Start column matching between uploaded target data and a source KG. Requires source_kg_id from /kg/add/{uuid} in the same session.",
+        "x-related-endpoints": [
+          "/kg/add/{uuid}",
+          "/cd/trackr/match/{uuid}/set",
+          "/cd/trackr/run/{uuid}"
+        ],
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CDTrackrMatchStartRequest"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "cd_trackr_match_uuid_get",
+        "tags": [
+          "CD TraCKR 02 Match"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CDMatchGetResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/cd/trackr/match/{uuid}/set": {
+      "post": {
+        "operationId": "cd_trackr_match_uuid_set_post",
+        "tags": [
+          "CD TraCKR 03 Set",
+          "Flow: TraCKR + KG"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CDMatchSetResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Confirm TraCKR matching mapping",
+        "description": "Persist or update target->source column mapping for TraCKR before run.",
+        "x-related-endpoints": [
+          "/cd/trackr/match/{uuid}",
+          "/cd/trackr/run/{uuid}"
+        ],
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CDTrackrMatchSetRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cd/trackr/run/{uuid}": {
+      "post": {
+        "operationId": "cd_trackr_run_uuid_post",
+        "tags": [
+          "CD TraCKR 04 Run",
+          "Flow: TraCKR + KG"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CDQueuedResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Run TraCKR with transferred KG knowledge",
+        "description": "Queue a TraCKR run. transferred_knowledge.kg_id must come from /kg/add/{uuid}, and transferred_knowledge.session_uuid must equal path {uuid}.",
+        "x-related-endpoints": [
+          "/kg/add/{uuid}",
+          "/cd/upload-url/{uuid}",
+          "/cd/status/{uuid}",
+          "/cd/result/{uuid}"
+        ],
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CDTrackrRunRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cd/multica/match/{uuid}": {
+      "post": {
+        "operationId": "cd_multica_match_uuid_post",
+        "tags": [
+          "CD MultiCa 02 Match",
+          "Flow: MultiCa"
+        ],
+        "responses": {
+          "202": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CDMatchStartResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Start MultiCa matching",
+        "description": "Start automatic column matching for MultiCa using uploaded data only (no KG dependency).\n\nInput formats:\n- JSON: {\"data\": [dataset1, dataset2, ...]}\n- ZIP: each .csv member is parsed as one dataset, in ZIP member order.\nIf metadata is provided, metadata length must match dataset count.",
+        "x-related-endpoints": [
+          "/cd/multica/match/{uuid}/set",
+          "/cd/multica/run/{uuid}"
+        ],
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CDMulticaMatchStartRequest"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "cd_multica_match_uuid_get",
+        "tags": [
+          "CD MultiCa 02 Match"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CDMatchGetResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/cd/multica/match/{uuid}/set": {
+      "post": {
+        "operationId": "cd_multica_match_uuid_set_post",
+        "tags": [
+          "CD MultiCa 03 Set",
+          "Flow: MultiCa"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CDMatchSetResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Confirm MultiCa matching mapping",
+        "description": "Persist or update column mapping used by MultiCa run.",
+        "x-related-endpoints": [
+          "/cd/multica/match/{uuid}",
+          "/cd/multica/run/{uuid}"
+        ],
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CDMulticaMatchSetRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cd/multica/run/{uuid}": {
+      "post": {
+        "operationId": "cd_multica_run_uuid_post",
+        "tags": [
+          "CD MultiCa 04 Run",
+          "Flow: MultiCa"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CDQueuedResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Run MultiCa (session-scoped)",
+        "description": "Queue a MultiCa run using uploaded CD input data in the same session (session is initialized by /kg/init). This endpoint does not accept transferred_knowledge.\n\nInput formats:\n- JSON: {\"data\": [dataset1, dataset2, ...]}\n- ZIP: each .csv member is parsed as one dataset, in ZIP member order.\nNote: MultiCa requires at least 2 datasets.",
+        "x-related-endpoints": [
+          "/cd/upload-url/{uuid}",
+          "/cd/multica/match/{uuid}",
+          "/cd/status/{uuid}",
+          "/cd/result/{uuid}"
+        ],
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CDMulticaRunRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cd/status/{uuid}": {
+      "get": {
+        "operationId": "cd_status_uuid_get",
+        "tags": [
+          "CD Common 05 Status",
+          "Flow: LiNGAM",
+          "Flow: TraCKR + KG",
+          "Flow: MultiCa"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CDStatusResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get CD task status",
+        "description": "Query asynchronous CD task execution status by task_id. Typical status transitions are queued -> running -> succeeded|failed.",
+        "x-related-endpoints": [
+          "/cd/upload-url/{uuid}",
+          "/cd/lingam/run/{uuid}",
+          "/cd/trackr/run/{uuid}",
+          "/cd/multica/run/{uuid}",
+          "/cd/result/{uuid}"
+        ],
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/cd/result/{uuid}": {
+      "get": {
+        "operationId": "cd_result_uuid_get",
+        "tags": [
+          "CD Common 06 Result",
+          "Flow: LiNGAM",
+          "Flow: TraCKR + KG",
+          "Flow: MultiCa"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CDResultResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get CD task result URL",
+        "description": "Return a pre-signed URL for downloading the final CD result JSON after task completion.\n\nFrontend contract (top-level metadata):\n- `uuid` (string): session UUID.\n- `task_id` (string): CD task id.\n- `mode` (string): one of `\"lingam\"`, `\"trackr\"`, `\"multica\"`.\n- `status` (string): `\"succeeded\"` for successful artifact.\n- `timestamp` (string): ISO8601 UTC completion time.\n\nCommon CD payload fields:\n- `feature_names` (string[]): ordered feature names used by causal discovery.\n- `adjacency_matrices` (number[][]): discovered causal adjacency matrix in industry orientation `cause=row, effect=col`.\n  - `adjacency_matrices[i][j] != 0` means feature `feature_names[i]` causes feature `feature_names[j]`.\n- `num_datasets` (number): number of datasets used in fitting.\n- `num_variables` (number): number of variables/features in result.\n- `training_data.columns` (string[]): one-hot/processed training column order.\n- `training_data.data` (number[][]): processed training rows aligned to `columns`.\n- `feature_metadata.feature_types` (object): variable type map (e.g., numeric/categorical).\n- `feature_metadata.feature_categories` (object): category mapping for one-hot groups.\n\nMode-specific fields:\n- `trackr`: includes `kg_id` and `matching_used`.\n- `multica`: includes `matching_used`.\n- `lingam`: does not include `kg_id` / `matching_used`.\n\nCross-service note:\n- Knowledge Graph uploads also use `cause=row, effect=col`.\n- Decision Analysis converts this internally to Cation's `effect=row, cause=col` representation at DA ingest.\n\nWhich example to use by flow:\n- If your flow is LiNGAM (`/cd/lingam/run/{uuid}`), use the `lingam` example.\n- If your flow is TraCKR (`/cd/trackr/match` -> `/cd/trackr/run/{uuid}`), use the `trackr` example.\n- If your flow is MultiCa (`/cd/multica/match` -> `/cd/multica/run/{uuid}`), use the `multica` example.\n\nExample (lingam mode):\n```json\n{\n  \"uuid\": \"<session_uuid>\",\n  \"task_id\": \"<cd_task_id>\",\n  \"mode\": \"lingam\",\n  \"status\": \"succeeded\",\n  \"timestamp\": \"2026-02-26T22:31:06.016699+00:00\",\n  \"feature_names\": [\"age\", \"income\", \"status=active\"],\n  \"adjacency_matrices\": [\n    [0.0, 0.3, 0.0],\n    [0.0, 0.0, 0.5],\n    [0.0, 0.0, 0.0]\n  ],\n  \"num_datasets\": 1,\n  \"num_variables\": 3,\n  \"training_data\": {\n    \"columns\": [\"age\", \"income\", \"status=active\"],\n    \"data\": [[30.0, 60000.0, 1.0], [42.0, 85000.0, 0.0]]\n  },\n  \"feature_metadata\": {\n    \"feature_types\": {\n      \"age\": \"numeric\",\n      \"income\": \"numeric\",\n      \"status=active\": \"one_hot\"\n    },\n    \"feature_categories\": {\n      \"status\": [\"status=active\"]\n    }\n  }\n}\n```\n\nExample (trackr mode):\n```json\n{\n  \"uuid\": \"<session_uuid>\",\n  \"task_id\": \"<cd_task_id>\",\n  \"mode\": \"trackr\",\n  \"status\": \"succeeded\",\n  \"timestamp\": \"2026-02-26T22:31:06.016699+00:00\",\n  \"feature_names\": [\"age\", \"income\", \"status=active\"],\n  \"adjacency_matrices\": [\n    [0.0, 0.2, 0.0],\n    [0.1, 0.0, 0.4],\n    [0.0, 0.0, 0.0]\n  ],\n  \"num_datasets\": 1,\n  \"num_variables\": 3,\n  \"kg_id\": \"<kg_id>\",\n  \"matching_used\": \"matching/trackr/<session_uuid>/state.json\",\n  \"training_data\": {\n    \"columns\": [\"age\", \"income\", \"status=active\"],\n    \"data\": [[30.0, 60000.0, 1.0], [42.0, 85000.0, 0.0]]\n  },\n  \"feature_metadata\": {\n    \"feature_types\": {\n      \"age\": \"numeric\",\n      \"income\": \"numeric\",\n      \"status=active\": \"one_hot\"\n    },\n    \"feature_categories\": {\n      \"status\": [\"status=active\"]\n    }\n  }\n}\n```\n\nExample (multica mode):\n```json\n{\n  \"uuid\": \"<session_uuid>\",\n  \"task_id\": \"<cd_task_id>\",\n  \"mode\": \"multica\",\n  \"status\": \"succeeded\",\n  \"timestamp\": \"2026-02-26T22:31:06.016699+00:00\",\n  \"feature_names\": [\"region=APAC\", \"budget\", \"conversion\"],\n  \"adjacency_matrices\": [\n    [0.0, 0.15, 0.10],\n    [0.0, 0.0, 0.45],\n    [0.0, 0.0, 0.0]\n  ],\n  \"num_datasets\": 3,\n  \"num_variables\": 3,\n  \"matching_used\": \"matching/multica/<session_uuid>/state.json\",\n  \"training_data\": {\n    \"columns\": [\"region=APAC\", \"budget\", \"conversion\"],\n    \"data\": [[1.0, 1200.0, 0.3], [0.0, 1500.0, 0.4]]\n  },\n  \"feature_metadata\": {\n    \"feature_types\": {\n      \"region=APAC\": \"one_hot\",\n      \"budget\": \"numeric\",\n      \"conversion\": \"numeric\"\n    },\n    \"feature_categories\": {\n      \"region\": [\"region=APAC\"]\n    }\n  }\n}\n```",
+        "x-related-endpoints": [
+          "/cd/status/{uuid}",
+          "/cd/lingam/run/{uuid}",
+          "/cd/trackr/run/{uuid}",
+          "/cd/multica/run/{uuid}"
+        ],
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/da/explain/{uuid}": {
+      "post": {
+        "operationId": "da_explain_uuid_post",
+        "tags": [
+          "DA 01 Explain",
+          "Flow: CD + DA"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DAQueuedResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Start decision analysis explanation",
+        "description": "Queue a DA explain task using CD result reference (cd_result_reference.session_uuid + task_id). Typical usage is LiNGAM/CD completion followed by DA explain.",
+        "x-related-endpoints": [
+          "/cd/result/{uuid}",
+          "/da/status/{uuid}",
+          "/da/result/{uuid}",
+          "/da/task/{uuid}"
+        ],
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DATaskRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/da/enumerate/{uuid}": {
+      "post": {
+        "operationId": "da_enumerate_uuid_post",
+        "tags": [
+          "DA 02 Enumerate",
+          "Flow: CD + DA"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DAQueuedResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Start decision analysis enumeration",
+        "description": "Queue a DA enumerate task using CD result reference. Use this when you need multiple candidate actions/options.",
+        "x-related-endpoints": [
+          "/cd/result/{uuid}",
+          "/da/status/{uuid}",
+          "/da/result/{uuid}",
+          "/da/task/{uuid}"
+        ],
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DATaskRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/da/status/{uuid}": {
+      "get": {
+        "operationId": "da_status_uuid_get",
+        "tags": [
+          "DA 03 Status",
+          "Flow: CD + DA"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DAStatusResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get DA task status",
+        "description": "Query asynchronous DA task execution status by task_id. Typical status transitions are queued -> running -> succeeded|failed.",
+        "x-related-endpoints": [
+          "/da/explain/{uuid}",
+          "/da/enumerate/{uuid}",
+          "/da/result/{uuid}"
+        ],
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/da/result/{uuid}": {
+      "get": {
+        "operationId": "da_result_uuid_get",
+        "tags": [
+          "DA 04 Result",
+          "Flow: CD + DA"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DAResultResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get DA task result URL",
+        "description": "Return a pre-signed URL for downloading the final DA result JSON after task completion.\n\nFrontend contract (top-level metadata):\n- `uuid` (string): session UUID.\n- `task_id` (string): DA task id.\n- `mode` (string): `\"explain\"` or `\"enumerate\"`.\n- `status` (string): `\"succeeded\"` for successful artifact.\n- `timestamp` (string): ISO8601 UTC completion time.\n\nMode-specific payload:\n- `mode=\"explain\"`: response has `result` (object).\n- `mode=\"enumerate\"`: response has `results` (array of explain-like objects).\n\nExplain result object (full fields):\n- `is_solved` (boolean): whether thresholds are satisfied by a found action.\n- `z` (number[]): current full feature vector.\n- `x` (number[]): current actionable-feature sub-vector.\n- `y` (number[]): current target values.\n- `threshold` (number[]): requested target thresholds.\n- `action` (number[]): recommended feature deltas.\n- `effect` (number[][]): per-graph causal effect on all features.\n- `z_cf` (number[][]): per-graph counterfactual full feature vectors.\n- `x_cf` (number[][]): per-graph counterfactual actionable vectors.\n- `y_cf` (number[][]): per-graph counterfactual target values.\n- `cost` (number): optimization cost.\n- `dist` (number[]): per-graph distance/penalty terms.\n- `obj` (number): optimization objective value.\n- `support` (number[]): indices of non-zero action entries.\n- `support_effect` (number[]): indices where causal effect exceeds tolerance.\n- `time` (number): solver elapsed time in seconds.\n\nUnsolved behavior (`is_solved=false`):\n- `action` is all zeros.\n- `cost` is `0.0`.\n- `dist` is all zeros.\n- `obj` is large (`1e13`, MAX_VAL).\n- `z_cf` repeats current `z`; `y_cf` mirrors current targets per graph.\n\nNote for frontend:\n- In `enumerate` mode, `results` can be an empty array when no feasible non-empty action is found.\n\nExample (explain mode, unsolved):\n```json\n{\n  \"uuid\": \"<session_uuid>\",\n  \"task_id\": \"<da_task_id>\",\n  \"mode\": \"explain\",\n  \"status\": \"succeeded\",\n  \"timestamp\": \"2026-02-26T22:31:06.016699+00:00\",\n  \"result\": {\n    \"is_solved\": false,\n    \"z\": [0.5, 1.2, 2.1],\n    \"x\": [0.5, 1.2],\n    \"y\": [0.5],\n    \"threshold\": [0.8],\n    \"action\": [0.0, 0.0, 0.0],\n    \"effect\": [[0.0, 0.0, 0.0]],\n    \"z_cf\": [[0.5, 1.2, 2.1]],\n    \"x_cf\": [[0.5, 1.2]],\n    \"y_cf\": [[0.5]],\n    \"cost\": 0.0,\n    \"dist\": [0.0],\n    \"obj\": 10000000000000.0,\n    \"support\": [],\n    \"support_effect\": [],\n    \"time\": 0.0021\n  }\n}\n```\n\nExample (enumerate mode):\n```json\n{\n  \"uuid\": \"<session_uuid>\",\n  \"task_id\": \"<da_task_id>\",\n  \"mode\": \"enumerate\",\n  \"status\": \"succeeded\",\n  \"timestamp\": \"2026-02-26T22:31:06.016699+00:00\",\n  \"results\": [\n    {\n      \"is_solved\": true,\n      \"z\": [0.5, 1.2, 2.1],\n      \"x\": [0.5, 1.2],\n      \"y\": [0.5],\n      \"threshold\": [0.8],\n      \"action\": [0.3, 0.0, 0.1],\n      \"effect\": [[0.02, 0.01, 0.00]],\n      \"z_cf\": [[0.82, 1.21, 2.2]],\n      \"x_cf\": [[0.82, 1.21]],\n      \"y_cf\": [[0.81]],\n      \"cost\": 0.4,\n      \"dist\": [0.0],\n      \"obj\": 0.4,\n      \"support\": [0, 2],\n      \"support_effect\": [0, 1],\n      \"time\": 0.0049\n    }\n  ]\n}\n```\n\nSchemas by mode: [DAExplainArtifact](#/components/schemas/DAExplainArtifact), [DAEnumerateArtifact](#/components/schemas/DAEnumerateArtifact).",
+        "x-related-endpoints": [
+          "/da/status/{uuid}",
+          "/da/explain/{uuid}",
+          "/da/enumerate/{uuid}"
+        ],
+        "x-result-artifact-schema": "#/components/schemas/DAExplainArtifact",
+        "x-result-artifact-schemas": {
+          "explain": "#/components/schemas/DAExplainArtifact",
+          "enumerate": "#/components/schemas/DAEnumerateArtifact"
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/da/task/{uuid}": {
+      "delete": {
+        "operationId": "da_task_uuid_delete",
+        "tags": [
+          "DA 05 Delete",
+          "Flow: CD + DA"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DADeleteResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Delete DA task and artifacts",
+        "description": "Delete DA task metadata and related artifacts by task_id in the given session.",
+        "x-related-endpoints": [
+          "/da/explain/{uuid}",
+          "/da/enumerate/{uuid}",
+          "/da/status/{uuid}",
+          "/da/result/{uuid}"
+        ],
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/cd/task/{uuid}": {
+      "delete": {
+        "operationId": "cd_task_uuid_delete",
+        "tags": [
+          "CD Common 07 Delete"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CDDeleteTaskResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/cd/match/{uuid}": {
+      "delete": {
+        "operationId": "cd_match_uuid_delete",
+        "tags": [
+          "CD Common 07 Delete"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CDDeleteMatchResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "matching_type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/agent/session": {
+      "post": {
+        "operationId": "agent_session_post",
+        "tags": [
+          "Agent 04 SessionCreate",
+          "Flow: Agent Wizard"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentPassthroughResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create an agent session",
+        "description": "Create a new conversation session for the agent wizard flow.",
+        "x-related-endpoints": [
+          "/agent/chat",
+          "/agent/session/{session_id}"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgentCreateSessionRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agent/chat": {
+      "post": {
+        "operationId": "agent_chat_post",
+        "tags": [
+          "Agent 01 Chat",
+          "Flow: Agent Wizard"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentPassthroughResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Send user chat message to agent",
+        "description": "Send chat messages to the in-process agent runtime and return the next assistant response.",
+        "x-related-endpoints": [
+          "/agent/session",
+          "/agent/approve",
+          "/agent/next"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgentChatRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agent/approve": {
+      "post": {
+        "operationId": "agent_approve_post",
+        "tags": [
+          "Agent 02 Approve",
+          "Flow: Agent Wizard"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentPassthroughResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Approve or reject deferred agent action",
+        "description": "Resume a paused agent turn after a user approves or rejects an action card.",
+        "x-related-endpoints": [
+          "/agent/chat",
+          "/agent/next"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgentApproveRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agent/next": {
+      "post": {
+        "operationId": "agent_next_post",
+        "tags": [
+          "Agent 03 Next",
+          "Flow: Agent Wizard"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentPassthroughResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Advance or query current wizard step",
+        "description": "Advance to the next step when possible, or ask the agent what is still required.",
+        "x-related-endpoints": [
+          "/agent/chat",
+          "/agent/approve"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgentNextRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agent/session/{session_id}": {
+      "get": {
+        "operationId": "agent_session_session_id_get",
+        "tags": [
+          "Agent 05 SessionGet",
+          "Flow: Agent Wizard"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentPassthroughResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get current agent session state",
+        "description": "Return the latest persisted state for a given agent session identifier.",
+        "x-related-endpoints": [
+          "/agent/chat",
+          "/agent/session"
+        ],
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/kg/graph/{uuid}": {
+      "delete": {
+        "operationId": "kg_graph_uuid_delete",
+        "tags": [
+          "KG 06 Delete"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KGDeleteResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "get": {
+        "operationId": "kg_graph_uuid_get",
+        "tags": [
+          "KG 05 Graph"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KGGraphResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get KG detail",
+        "description": "Return KG detail and downloadable payload metadata for a selected graph.",
+        "x-related-endpoints": [
+          "/kg/list/{uuid}",
+          "/cd/trackr/run/{uuid}"
+        ],
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/kg/list/{uuid}": {
+      "get": {
+        "operationId": "kg_list_uuid_get",
+        "tags": [
+          "KG 04 List"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KGListResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "List KG entries in session",
+        "description": "List all knowledge graphs available under the current session UUID.",
+        "x-related-endpoints": [
+          "/kg/graph/{uuid}",
+          "/cd/trackr/match/{uuid}"
+        ],
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/kg/token-balance": {
+      "get": {
+        "operationId": "kg_token_balance_get",
+        "tags": [
+          "KG 99 Other"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KGTokenBalanceResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-tagGroups": [
+    {
+      "name": "Causal Discovery Flow",
+      "tags": [
+        "Flow: LiNGAM",
+        "Flow: TraCKR + KG",
+        "Flow: MultiCa"
+      ]
+    },
+    {
+      "name": "Decision Analysis Flow",
+      "tags": [
+        "Flow: CD + DA"
+      ]
+    },
+    {
+      "name": "Knowledge Graph Endpoints",
+      "tags": [
+        "KG 01 Init",
+        "KG 02 Upload",
+        "KG 03 Add",
+        "KG 04 List",
+        "KG 05 Graph",
+        "KG 06 Delete",
+        "KG 99 Other"
+      ]
+    },
+    {
+      "name": "Causal Discovery Endpoints",
+      "tags": [
+        "CD Common 01 Upload",
+        "CD LiNGAM 02 Run",
+        "CD TraCKR 02 Match",
+        "CD TraCKR 03 Set",
+        "CD TraCKR 04 Run",
+        "CD MultiCa 02 Match",
+        "CD MultiCa 03 Set",
+        "CD MultiCa 04 Run",
+        "CD Common 05 Status",
+        "CD Common 06 Result",
+        "CD Common 07 Delete",
+        "CD Common 99 Other"
+      ]
+    },
+    {
+      "name": "Decision Analysis Endpoints",
+      "tags": [
+        "DA 01 Explain",
+        "DA 02 Enumerate",
+        "DA 03 Status",
+        "DA 04 Result",
+        "DA 05 Delete",
+        "DA 99 Other"
+      ]
+    },
+    {
+      "name": "Agent Endpoints",
+      "tags": [
+        "Agent 01 Chat",
+        "Agent 02 Approve",
+        "Agent 03 Next",
+        "Agent 04 SessionCreate",
+        "Agent 05 SessionGet",
+        "Agent 99 Other",
+        "Flow: Agent Wizard"
+      ]
+    },
+    {
+      "name": "Other Services",
+      "tags": [
+        "General"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "name": "CD Common 01 Upload",
+      "description": "Generate upload URLs for CD inputs"
+    },
+    {
+      "name": "CD Common 05 Status",
+      "description": "Check CD task status"
+    },
+    {
+      "name": "CD Common 06 Result",
+      "description": "Fetch CD task results"
+    },
+    {
+      "name": "CD Common 07 Delete",
+      "description": "Delete CD tasks or matching state"
+    },
+    {
+      "name": "CD Common 99 Other",
+      "description": "Other shared Causal Discovery APIs"
+    },
+    {
+      "name": "CD TraCKR 02 Match",
+      "description": "Start/query TraCKR matching"
+    },
+    {
+      "name": "CD TraCKR 03 Set",
+      "description": "Confirm TraCKR matching mappings"
+    },
+    {
+      "name": "CD TraCKR 04 Run",
+      "description": "Start TraCKR model runs"
+    },
+    {
+      "name": "CD MultiCa 02 Match",
+      "description": "Start/query MultiCa matching"
+    },
+    {
+      "name": "CD MultiCa 03 Set",
+      "description": "Confirm MultiCa matching mappings"
+    },
+    {
+      "name": "CD MultiCa 04 Run",
+      "description": "Start MultiCa model runs"
+    },
+    {
+      "name": "CD LiNGAM 02 Run",
+      "description": "Start LayeredLiNGAM model runs"
+    },
+    {
+      "name": "KG 01 Init",
+      "description": "Initialize KG sessions"
+    },
+    {
+      "name": "KG 02 Upload",
+      "description": "Generate upload URLs for KG inputs"
+    },
+    {
+      "name": "KG 03 Add",
+      "description": "Register KG metadata"
+    },
+    {
+      "name": "KG 04 List",
+      "description": "List knowledge graphs"
+    },
+    {
+      "name": "KG 05 Graph",
+      "description": "Get knowledge graph details"
+    },
+    {
+      "name": "KG 06 Delete",
+      "description": "Delete knowledge graphs or sessions"
+    },
+    {
+      "name": "KG 99 Other",
+      "description": "Other knowledge graph APIs"
+    },
+    {
+      "name": "Flow: TraCKR + KG",
+      "description": "Cross-service flow: KG init/upload/add -> TraCKR match/set/run -> status/result."
+    },
+    {
+      "name": "Flow: MultiCa",
+      "description": "Session flow: KG init (session bootstrap) -> CD upload -> MultiCa match/set/run -> status/result."
+    },
+    {
+      "name": "Flow: LiNGAM",
+      "description": "Session flow: KG init (session bootstrap) -> CD upload -> LiNGAM run -> status/result."
+    },
+    {
+      "name": "Flow: CD + DA",
+      "description": "Decision analysis flow continues from causal discovery results: KG init -> CD upload -> CD run (LiNGAM/TraCKR/MultiCa) -> CD result -> DA explain/enumerate -> DA status/result."
+    },
+    {
+      "name": "DA 01 Explain",
+      "description": "Submit DA explain tasks from CD results"
+    },
+    {
+      "name": "DA 02 Enumerate",
+      "description": "Submit DA enumerate tasks from CD results"
+    },
+    {
+      "name": "DA 03 Status",
+      "description": "Check DA task status"
+    },
+    {
+      "name": "DA 04 Result",
+      "description": "Fetch DA task results"
+    },
+    {
+      "name": "DA 05 Delete",
+      "description": "Delete DA tasks and artifacts"
+    },
+    {
+      "name": "DA 99 Other",
+      "description": "Other Decision Analysis APIs"
+    },
+    {
+      "name": "Agent 01 Chat",
+      "description": "Send user messages into agent flow"
+    },
+    {
+      "name": "Agent 02 Approve",
+      "description": "Approve or reject deferred agent actions"
+    },
+    {
+      "name": "Agent 03 Next",
+      "description": "Advance or query current wizard step"
+    },
+    {
+      "name": "Agent 04 SessionCreate",
+      "description": "Create agent conversation session"
+    },
+    {
+      "name": "Agent 05 SessionGet",
+      "description": "Fetch persisted agent session state"
+    },
+    {
+      "name": "Agent 99 Other",
+      "description": "Other Agent APIs"
+    },
+    {
+      "name": "Flow: Agent Wizard",
+      "description": "Agent workflow: create session -> chat -> approve deferred actions -> advance next step."
+    },
+    {
+      "name": "General",
+      "description": "Miscellaneous APIs"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-Key"
+      }
+    },
+    "schemas": {
+      "ErrorResponse": {
+        "description": "Unified error payload schema used across endpoints.",
+        "properties": {
+          "error": {
+            "title": "Error",
+            "type": "string"
+          },
+          "message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Message"
+          },
+          "error_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Error Code"
+          },
+          "status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Status"
+          },
+          "details": {
+            "anyOf": [
+              {},
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Details"
+          }
+        },
+        "required": [
+          "error"
+        ],
+        "type": "object"
+      },
+      "KGTokenBalanceResponse": {
+        "description": "Response payload for querying current token balance.",
+        "properties": {
+          "company_name": {
+            "title": "Company Name",
+            "type": "string"
+          },
+          "token_balance": {
+            "minimum": 0,
+            "title": "Token Balance",
+            "type": "integer"
+          },
+          "status": {
+            "default": "ok",
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "company_name",
+          "token_balance"
+        ],
+        "type": "object"
+      },
+      "KGInitResponse": {
+        "description": "Response payload for KG session initialization.",
+        "properties": {
+          "uuid": {
+            "title": "Uuid",
+            "type": "string"
+          },
+          "status": {
+            "default": "ok",
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "uuid"
+        ],
+        "type": "object"
+      },
+      "KGUploadUrlRequest": {
+        "description": "Request payload for creating KG upload URL.",
+        "example": {
+          "expires_in": 900,
+          "filename": "source_graph.csv"
+        },
+        "properties": {
+          "filename": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Filename"
+          },
+          "expires_in": {
+            "anyOf": [
+              {
+                "minimum": 1,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": 900,
+            "title": "Expires In"
+          }
+        },
+        "type": "object"
+      },
+      "KGUploadUrlResponse": {
+        "description": "Response payload with pre-signed KG upload URL.",
+        "example": {
+          "expires_in": 900,
+          "s3_key": "kg/7b2c2fb2-67f2-4d07-9d5a-8d2fa9a9b4be/3f9e9b95-source_graph.csv",
+          "status": "ok",
+          "upload_url": "https://s3.amazonaws.com/example-bucket/presigned-upload-url",
+          "uuid": "7b2c2fb2-67f2-4d07-9d5a-8d2fa9a9b4be"
+        },
+        "properties": {
+          "uuid": {
+            "title": "Uuid",
+            "type": "string"
+          },
+          "status": {
+            "default": "ok",
+            "title": "Status",
+            "type": "string"
+          },
+          "s3_key": {
+            "title": "S3 Key",
+            "type": "string"
+          },
+          "upload_url": {
+            "title": "Upload Url",
+            "type": "string"
+          },
+          "expires_in": {
+            "title": "Expires In",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "uuid",
+          "s3_key",
+          "upload_url",
+          "expires_in"
+        ],
+        "type": "object"
+      },
+      "KGAddRequest": {
+        "additionalProperties": false,
+        "description": "Request payload for registering a KG dataset.",
+        "example": {
+          "columns": [
+            "X1",
+            "X2",
+            "X3",
+            "X4",
+            "state"
+          ],
+          "row_count": 5,
+          "s3_key": "kg/7b2c2fb2-67f2-4d07-9d5a-8d2fa9a9b4be/3f9e9b95-source_graph.csv",
+          "size_bytes": 142,
+          "title": "Source Domain Knowledge Graph"
+        },
+        "properties": {
+          "title": {
+            "minLength": 1,
+            "title": "Title",
+            "type": "string"
+          },
+          "columns": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Columns",
+            "type": "array"
+          },
+          "s3_key": {
+            "minLength": 1,
+            "title": "S3 Key",
+            "type": "string"
+          },
+          "row_count": {
+            "anyOf": [
+              {
+                "minimum": 0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Row Count"
+          },
+          "size_bytes": {
+            "anyOf": [
+              {
+                "minimum": 0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Size Bytes"
+          }
+        },
+        "required": [
+          "title",
+          "columns",
+          "s3_key"
+        ],
+        "type": "object"
+      },
+      "KGAddResponse": {
+        "description": "Response payload after KG dataset registration.",
+        "properties": {
+          "uuid": {
+            "title": "Uuid",
+            "type": "string"
+          },
+          "status": {
+            "default": "ok",
+            "title": "Status",
+            "type": "string"
+          },
+          "kg_id": {
+            "title": "Kg Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "uuid",
+          "kg_id"
+        ],
+        "type": "object"
+      },
+      "KGListItem": {
+        "description": "Single list item for KG summary response.",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Created At"
+          },
+          "num_nodes": {
+            "title": "Num Nodes",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "num_nodes"
+        ],
+        "type": "object"
+      },
+      "KGListResponse": {
+        "description": "Response payload containing KG list entries.",
+        "properties": {
+          "uuid": {
+            "title": "Uuid",
+            "type": "string"
+          },
+          "status": {
+            "default": "ok",
+            "title": "Status",
+            "type": "string"
+          },
+          "list": {
+            "items": {
+              "$ref": "#/components/schemas/KGListItem"
+            },
+            "title": "List",
+            "type": "array"
+          }
+        },
+        "required": [
+          "uuid",
+          "list"
+        ],
+        "type": "object"
+      },
+      "KGGraphPayload": {
+        "description": "Detailed KG graph metadata and download info.",
+        "properties": {
+          "columns": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Columns",
+            "type": "array"
+          },
+          "s3_key": {
+            "title": "S3 Key",
+            "type": "string"
+          },
+          "download_url": {
+            "title": "Download Url",
+            "type": "string"
+          },
+          "expires_in": {
+            "title": "Expires In",
+            "type": "integer"
+          },
+          "row_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Row Count"
+          },
+          "size_bytes": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Size Bytes"
+          }
+        },
+        "required": [
+          "columns",
+          "s3_key",
+          "download_url",
+          "expires_in"
+        ],
+        "type": "object"
+      },
+      "KGGraphResponse": {
+        "description": "Response payload for KG graph fetch endpoint.",
+        "properties": {
+          "uuid": {
+            "title": "Uuid",
+            "type": "string"
+          },
+          "status": {
+            "default": "ok",
+            "title": "Status",
+            "type": "string"
+          },
+          "kg": {
+            "$ref": "#/components/schemas/KGGraphPayload"
+          }
+        },
+        "required": [
+          "uuid",
+          "kg"
+        ],
+        "type": "object"
+      },
+      "KGDeleteResponse": {
+        "description": "Response payload after deleting a KG session and all graphs.",
+        "properties": {
+          "uuid": {
+            "title": "Uuid",
+            "type": "string"
+          },
+          "status": {
+            "default": "ok",
+            "title": "Status",
+            "type": "string"
+          },
+          "message": {
+            "title": "Message",
+            "type": "string"
+          }
+        },
+        "required": [
+          "uuid",
+          "message"
+        ],
+        "type": "object"
+      },
+      "CDUploadUrlResponse": {
+        "description": "Response payload for creating CD input upload URL.",
+        "example": {
+          "expires_in": 900,
+          "s3_key": "cd/7b2c2fb2-67f2-4d07-9d5a-8d2fa9a9b4be/5f3e8f2a-6f5f-45a6-a093-e7f4db7d2f0c/input",
+          "task_id": "5f3e8f2a-6f5f-45a6-a093-e7f4db7d2f0c",
+          "upload_url": "https://s3.amazonaws.com/example-bucket/presigned-upload-url",
+          "uuid": "7b2c2fb2-67f2-4d07-9d5a-8d2fa9a9b4be"
+        },
+        "properties": {
+          "uuid": {
+            "title": "Uuid",
+            "type": "string"
+          },
+          "task_id": {
+            "description": "CD upload task id. Use this value as task_id when submitting /cd/*/run requests.",
+            "title": "Task Id",
+            "type": "string"
+          },
+          "s3_key": {
+            "title": "S3 Key",
+            "type": "string"
+          },
+          "upload_url": {
+            "title": "Upload Url",
+            "type": "string"
+          },
+          "expires_in": {
+            "title": "Expires In",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "uuid",
+          "task_id",
+          "s3_key",
+          "upload_url",
+          "expires_in"
+        ],
+        "type": "object"
+      },
+      "CDTransferredKnowledgeReference": {
+        "additionalProperties": false,
+        "description": "Reference to transferred knowledge source in same session.",
+        "properties": {
+          "session_uuid": {
+            "minLength": 1,
+            "title": "Session Uuid",
+            "type": "string"
+          },
+          "kg_id": {
+            "minLength": 1,
+            "title": "Kg Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "session_uuid",
+          "kg_id"
+        ],
+        "type": "object"
+      },
+      "CDTrackrRunRequest": {
+        "additionalProperties": false,
+        "description": "Request body for starting a TraCKR CD run task.",
+        "example": {
+          "matching_task_id": "380de95d-8586-4c67-814c-f0d7b4fa72fd",
+          "params": {
+            "max_iter": 200
+          },
+          "s3_key": "cd/7b2c2fb2-67f2-4d07-9d5a-8d2fa9a9b4be/5f3e8f2a-6f5f-45a6-a093-e7f4db7d2f0c/input",
+          "task_id": "5f3e8f2a-6f5f-45a6-a093-e7f4db7d2f0c",
+          "threshold": 0.01,
+          "transferred_knowledge": {
+            "kg_id": "d3024e1c-ffdd-4e63-9e02-6d1e3ad53b17",
+            "session_uuid": "7b2c2fb2-67f2-4d07-9d5a-8d2fa9a9b4be"
+          }
+        },
+        "properties": {
+          "task_id": {
+            "description": "CD upload task id returned by /cd/upload-url/{uuid}.",
+            "title": "Task Id",
+            "type": "string"
+          },
+          "s3_key": {
+            "title": "S3 Key",
+            "type": "string"
+          },
+          "threshold": {
+            "anyOf": [
+              {
+                "exclusiveMinimum": 0,
+                "maximum": 1,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Threshold"
+          },
+          "params": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Params"
+          },
+          "transferred_knowledge": {
+            "$ref": "#/components/schemas/CDTransferredKnowledgeReference"
+          },
+          "matching_task_id": {
+            "title": "Matching Task Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "task_id",
+          "s3_key",
+          "transferred_knowledge",
+          "matching_task_id"
+        ],
+        "type": "object"
+      },
+      "CDQueuedResponse": {
+        "description": "Queued-state response after scheduling a CD task.",
+        "example": {
+          "status": "queued",
+          "task_id": "5f3e8f2a-6f5f-45a6-a093-e7f4db7d2f0c",
+          "uuid": "7b2c2fb2-67f2-4d07-9d5a-8d2fa9a9b4be"
+        },
+        "properties": {
+          "uuid": {
+            "title": "Uuid",
+            "type": "string"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          },
+          "task_id": {
+            "description": "CD run task id generated for this run execution.",
+            "title": "Task Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "uuid",
+          "status",
+          "task_id"
+        ],
+        "type": "object"
+      },
+      "CDMulticaRunRequest": {
+        "additionalProperties": false,
+        "description": "Request body for starting a MultiCa CD run task.",
+        "example": {
+          "matching_task_id": "380de95d-8586-4c67-814c-f0d7b4fa72fd",
+          "params": {
+            "max_iter": 200
+          },
+          "roots": [
+            "Age"
+          ],
+          "s3_key": "cd/7b2c2fb2-67f2-4d07-9d5a-8d2fa9a9b4be/5f3e8f2a-6f5f-45a6-a093-e7f4db7d2f0c/input",
+          "sinks": [
+            "RiskScore"
+          ],
+          "task_id": "5f3e8f2a-6f5f-45a6-a093-e7f4db7d2f0c",
+          "threshold": 0.01
+        },
+        "properties": {
+          "task_id": {
+            "description": "CD upload task id returned by /cd/upload-url/{uuid}.",
+            "title": "Task Id",
+            "type": "string"
+          },
+          "s3_key": {
+            "title": "S3 Key",
+            "type": "string"
+          },
+          "threshold": {
+            "anyOf": [
+              {
+                "exclusiveMinimum": 0,
+                "maximum": 1,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Threshold"
+          },
+          "roots": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Roots"
+          },
+          "sinks": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Sinks"
+          },
+          "params": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Params"
+          },
+          "matching_task_id": {
+            "title": "Matching Task Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "task_id",
+          "s3_key",
+          "matching_task_id"
+        ],
+        "type": "object"
+      },
+      "CDLingamRunRequest": {
+        "additionalProperties": false,
+        "description": "Request body for starting a LayeredLiNGAM CD run task.",
+        "example": {
+          "params": {
+            "delta": 2.0,
+            "gamma": 1.0
+          },
+          "s3_key": "cd/7b2c2fb2-67f2-4d07-9d5a-8d2fa9a9b4be/5f3e8f2a-6f5f-45a6-a093-e7f4db7d2f0c/input",
+          "task_id": "5f3e8f2a-6f5f-45a6-a093-e7f4db7d2f0c",
+          "threshold": 0.01
+        },
+        "properties": {
+          "task_id": {
+            "description": "CD upload task id returned by /cd/upload-url/{uuid}.",
+            "title": "Task Id",
+            "type": "string"
+          },
+          "s3_key": {
+            "title": "S3 Key",
+            "type": "string"
+          },
+          "threshold": {
+            "anyOf": [
+              {
+                "exclusiveMinimum": 0,
+                "maximum": 1,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Threshold"
+          },
+          "params": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Params"
+          }
+        },
+        "required": [
+          "task_id",
+          "s3_key"
+        ],
+        "type": "object"
+      },
+      "CDStatusResponse": {
+        "description": "Response payload for querying CD task status.",
+        "example": {
+          "error": null,
+          "status": "running",
+          "task_id": "5f3e8f2a-6f5f-45a6-a093-e7f4db7d2f0c",
+          "uuid": "7b2c2fb2-67f2-4d07-9d5a-8d2fa9a9b4be"
+        },
+        "properties": {
+          "uuid": {
+            "title": "Uuid",
+            "type": "string"
+          },
+          "task_id": {
+            "description": "CD run task id returned by /cd/*/run/{uuid}.",
+            "title": "Task Id",
+            "type": "string"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Error"
+          }
+        },
+        "required": [
+          "uuid",
+          "task_id",
+          "status"
+        ],
+        "type": "object"
+      },
+      "CDResultResponse": {
+        "description": "Response payload containing a downloadable CD result.",
+        "example": {
+          "expires_in": 3600,
+          "result_url": "https://s3.amazonaws.com/example-bucket/presigned-result-url",
+          "status": "succeeded",
+          "task_id": "5f3e8f2a-6f5f-45a6-a093-e7f4db7d2f0c",
+          "uuid": "7b2c2fb2-67f2-4d07-9d5a-8d2fa9a9b4be"
+        },
+        "properties": {
+          "uuid": {
+            "title": "Uuid",
+            "type": "string"
+          },
+          "task_id": {
+            "description": "CD run task id returned by /cd/*/run/{uuid}.",
+            "title": "Task Id",
+            "type": "string"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          },
+          "result_url": {
+            "title": "Result Url",
+            "type": "string"
+          },
+          "expires_in": {
+            "title": "Expires In",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "uuid",
+          "task_id",
+          "status",
+          "result_url",
+          "expires_in"
+        ],
+        "type": "object"
+      },
+      "CDDeleteTaskResponse": {
+        "description": "Response payload after deleting a CD task.",
+        "example": {
+          "status": "deleted",
+          "task_id": "5f3e8f2a-6f5f-45a6-a093-e7f4db7d2f0c",
+          "uuid": "7b2c2fb2-67f2-4d07-9d5a-8d2fa9a9b4be"
+        },
+        "properties": {
+          "uuid": {
+            "title": "Uuid",
+            "type": "string"
+          },
+          "task_id": {
+            "description": "CD run task id returned by /cd/*/run/{uuid}.",
+            "title": "Task Id",
+            "type": "string"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "uuid",
+          "task_id",
+          "status"
+        ],
+        "type": "object"
+      },
+      "CDTrackrMatchStartRequest": {
+        "additionalProperties": false,
+        "description": "Request body for starting TRACKR matching.",
+        "example": {
+          "params": {
+            "gamma": 0.5,
+            "q_threshold": 0,
+            "top_n": 3
+          },
+          "source_kg_id": "d3024e1c-ffdd-4e63-9e02-6d1e3ad53b17",
+          "source_metadata": {
+            "AGE": "Age in source knowledge graph",
+            "BODY_MASS_INDEX": "BMI in source knowledge graph",
+            "RISK_SCORE": "Risk score in source knowledge graph"
+          },
+          "target_metadata": {
+            "Age": "Customer age in years",
+            "BMI": "Body mass index",
+            "RiskScore": "Predicted risk score"
+          },
+          "target_s3_key": "cd/7b2c2fb2-67f2-4d07-9d5a-8d2fa9a9b4be/5f3e8f2a-6f5f-45a6-a093-e7f4db7d2f0c/input"
+        },
+        "properties": {
+          "target_s3_key": {
+            "title": "Target S3 Key",
+            "type": "string"
+          },
+          "source_kg_id": {
+            "title": "Source Kg Id",
+            "type": "string"
+          },
+          "target_metadata": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Target Metadata"
+          },
+          "source_metadata": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Source Metadata"
+          },
+          "params": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Params"
+          }
+        },
+        "required": [
+          "target_s3_key",
+          "source_kg_id"
+        ],
+        "type": "object"
+      },
+      "CDMatchStartResponse": {
+        "description": "Response payload after a matching task is created.",
+        "example": {
+          "matching_task_id": "380de95d-8586-4c67-814c-f0d7b4fa72fd",
+          "message": "Matching computation started",
+          "status": "pending"
+        },
+        "properties": {
+          "matching_task_id": {
+            "title": "Matching Task Id",
+            "type": "string"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          },
+          "message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Message"
+          }
+        },
+        "required": [
+          "matching_task_id",
+          "status"
+        ],
+        "type": "object"
+      },
+      "CDMatchGetResponse": {
+        "description": "Response payload for querying matching progress and result.",
+        "example": {
+          "created_at": "2026-02-16T02:00:00+00:00",
+          "current_matched": {
+            "Age": "AGE",
+            "BMI": "BODY_MASS_INDEX",
+            "RiskScore": "RISK_SCORE"
+          },
+          "knowledge_coverage": "75.0%",
+          "match_rate": "66.7%",
+          "matching_task_id": "380de95d-8586-4c67-814c-f0d7b4fa72fd",
+          "message": "Matching computation finished",
+          "status": "completed",
+          "updated_at": "2026-02-16T02:03:00+00:00"
+        },
+        "properties": {
+          "status": {
+            "title": "Status",
+            "type": "string"
+          },
+          "matching_task_id": {
+            "title": "Matching Task Id",
+            "type": "string"
+          },
+          "message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Message"
+          },
+          "current_matched": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Current Matched"
+          },
+          "match_rate": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Match Rate"
+          },
+          "knowledge_coverage": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Knowledge Coverage"
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Created At"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Updated At"
+          }
+        },
+        "required": [
+          "status",
+          "matching_task_id"
+        ],
+        "type": "object"
+      },
+      "CDTrackrMatchSetRequest": {
+        "description": "Request body for confirming TRACKR matching selections.",
+        "example": {
+          "matching": {
+            "Age": "AGE",
+            "BMI": "BODY_MASS_INDEX",
+            "RiskScore": "RISK_SCORE"
+          },
+          "matching_task_id": "380de95d-8586-4c67-814c-f0d7b4fa72fd",
+          "source_columns": [
+            "AGE",
+            "BODY_MASS_INDEX",
+            "RISK_SCORE"
+          ],
+          "source_kg_id": "d3024e1c-ffdd-4e63-9e02-6d1e3ad53b17",
+          "target_columns": [
+            "Age",
+            "BMI",
+            "RiskScore"
+          ]
+        },
+        "properties": {
+          "matching": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Target->source mapping for TraCKR. Many-to-one is allowed (multiple target columns may map to the same source column).",
+            "minProperties": 1,
+            "title": "Matching",
+            "type": "object"
+          },
+          "matching_task_id": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Matching Task Id"
+          },
+          "target_columns": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1,
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Target Columns"
+          },
+          "source_columns": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1,
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Source Columns"
+          },
+          "source_kg_id": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Source Kg Id"
+          }
+        },
+        "required": [
+          "matching"
+        ],
+        "type": "object"
+      },
+      "CDMatchSetResponse": {
+        "description": "Response payload after matching selections are stored.",
+        "example": {
+          "current_matched": {
+            "Age": "AGE",
+            "BMI": "BODY_MASS_INDEX",
+            "RiskScore": "RISK_SCORE"
+          },
+          "matching_task_id": "380de95d-8586-4c67-814c-f0d7b4fa72fd",
+          "status": "updated"
+        },
+        "properties": {
+          "status": {
+            "title": "Status",
+            "type": "string"
+          },
+          "matching_task_id": {
+            "title": "Matching Task Id",
+            "type": "string"
+          },
+          "current_matched": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "title": "Current Matched",
+            "type": "object"
+          }
+        },
+        "required": [
+          "status",
+          "matching_task_id",
+          "current_matched"
+        ],
+        "type": "object"
+      },
+      "CDMulticaMatchStartRequest": {
+        "additionalProperties": false,
+        "description": "Request body for starting MULTICA matching.",
+        "example": {
+          "metadata": [
+            {
+              "Age": "years",
+              "BMI": "kg/m2",
+              "dataset": "hospital_a"
+            },
+            {
+              "AgeYears": "years",
+              "BodyMassIndex": "kg/m2",
+              "dataset": "hospital_b"
+            }
+          ],
+          "params": {
+            "gamma": 1.0,
+            "q_threshold": 0.0,
+            "top_n": 3
+          },
+          "s3_key": "cd/7b2c2fb2-67f2-4d07-9d5a-8d2fa9a9b4be/5f3e8f2a-6f5f-45a6-a093-e7f4db7d2f0c/input"
+        },
+        "properties": {
+          "s3_key": {
+            "title": "S3 Key",
+            "type": "string"
+          },
+          "metadata": {
+            "anyOf": [
+              {
+                "items": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Metadata"
+          },
+          "params": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Params"
+          }
+        },
+        "required": [
+          "s3_key"
+        ],
+        "type": "object"
+      },
+      "CDMulticaMatchSetRequest": {
+        "description": "Request body for confirming MULTICA matching selections.",
+        "example": {
+          "datasets_columns": [
+            [
+              "Age",
+              "BMI",
+              "RiskScore"
+            ],
+            [
+              "AgeYears",
+              "BodyMassIndex",
+              "RiskScore"
+            ]
+          ],
+          "matching": {
+            "Age": "AgeYears",
+            "BMI": "BodyMassIndex",
+            "RiskScore": "RiskScore"
+          },
+          "matching_task_id": "380de95d-8586-4c67-814c-f0d7b4fa72fd"
+        },
+        "properties": {
+          "matching": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "minProperties": 1,
+            "title": "Matching",
+            "type": "object"
+          },
+          "matching_task_id": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Matching Task Id"
+          },
+          "datasets_columns": {
+            "anyOf": [
+              {
+                "items": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "minItems": 1,
+                  "type": "array"
+                },
+                "minItems": 2,
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Datasets Columns"
+          }
+        },
+        "required": [
+          "matching"
+        ],
+        "type": "object"
+      },
+      "CDDeleteMatchResponse": {
+        "description": "Response payload for deleting matching state.",
+        "example": {
+          "matching_task_id": "380de95d-8586-4c67-814c-f0d7b4fa72fd",
+          "matching_type": "trackr",
+          "status": "deleted"
+        },
+        "properties": {
+          "matching_type": {
+            "title": "Matching Type",
+            "type": "string"
+          },
+          "matching_task_id": {
+            "title": "Matching Task Id",
+            "type": "string"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "matching_type",
+          "matching_task_id",
+          "status"
+        ],
+        "type": "object"
+      },
+      "CDResultReference": {
+        "additionalProperties": false,
+        "description": "Reference to a CD task result (session + task).",
+        "example": {
+          "session_uuid": "7b2c2fb2-67f2-4d07-9d5a-8d2fa9a9b4be",
+          "task_id": "5f3e8f2a-6f5f-45a6-a093-e7f4db7d2f0c"
+        },
+        "properties": {
+          "session_uuid": {
+            "minLength": 1,
+            "title": "Session Uuid",
+            "type": "string"
+          },
+          "task_id": {
+            "description": "CD run task id (from /cd/*/run/{uuid}) to use as DA input.",
+            "minLength": 1,
+            "title": "Task Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "session_uuid",
+          "task_id"
+        ],
+        "type": "object"
+      },
+      "DAConstraints": {
+        "additionalProperties": false,
+        "description": "Optional feature constraints. If provided, only these keys are allowed with correct types.",
+        "properties": {
+          "immutable": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Immutable"
+          },
+          "increase_only": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Increase Only"
+          },
+          "decrease_only": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Decrease Only"
+          },
+          "immutable_effect": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Immutable Effect"
+          }
+        },
+        "type": "object"
+      },
+      "DAParams": {
+        "additionalProperties": false,
+        "description": "Optional algorithm params. If provided, only these keys are allowed with correct types.",
+        "properties": {
+          "alpha": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Alpha"
+          },
+          "lagrange_multiplier": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Lagrange Multiplier"
+          },
+          "constrain_effects_in_bounds": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Constrain Effects In Bounds"
+          },
+          "time_limit": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Time Limit"
+          },
+          "verbose": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Verbose"
+          },
+          "n_actions": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "N Actions"
+          },
+          "key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Key"
+          }
+        },
+        "type": "object"
+      },
+      "DATaskRequest": {
+        "additionalProperties": false,
+        "description": "DA task submit request (explain/enumerate).",
+        "example": {
+          "cd_result_reference": {
+            "session_uuid": "7b2c2fb2-67f2-4d07-9d5a-8d2fa9a9b4be",
+            "task_id": "5f3e8f2a-6f5f-45a6-a093-e7f4db7d2f0c"
+          },
+          "constraints": {
+            "decrease_only": [
+              "debt"
+            ],
+            "immutable": [
+              "age"
+            ],
+            "immutable_effect": [
+              "age"
+            ],
+            "increase_only": [
+              "education"
+            ]
+          },
+          "current_observation": {
+            "age": 0.45,
+            "debt": 0.4,
+            "education": 0.6
+          },
+          "params": {
+            "alpha": 1.0,
+            "lagrange_multiplier": 0.0,
+            "time_limit": 60.0
+          },
+          "targets": [
+            {
+              "col": "debt",
+              "sense": ">",
+              "threshold": 0.8
+            }
+          ]
+        },
+        "properties": {
+          "cd_result_reference": {
+            "$ref": "#/components/schemas/CDResultReference"
+          },
+          "current_observation": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "minProperties": 1,
+            "title": "Current Observation",
+            "type": "object"
+          },
+          "targets": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "minItems": 1,
+            "title": "Targets",
+            "type": "array"
+          },
+          "constraints": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DAConstraints"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "feature_penalties": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Feature Penalties"
+          },
+          "params": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DAParams"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          }
+        },
+        "required": [
+          "cd_result_reference",
+          "current_observation",
+          "targets"
+        ],
+        "type": "object"
+      },
+      "DAQueuedResponse": {
+        "description": "Queued-state response for DA task submission.",
+        "example": {
+          "status": "queued",
+          "task_id": "5f3e8f2a-6f5f-45a6-a093-e7f4db7d2f0c",
+          "uuid": "7b2c2fb2-67f2-4d07-9d5a-8d2fa9a9b4be"
+        },
+        "properties": {
+          "uuid": {
+            "title": "Uuid",
+            "type": "string"
+          },
+          "task_id": {
+            "description": "DA task id generated for this request.",
+            "title": "Task Id",
+            "type": "string"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "uuid",
+          "task_id",
+          "status"
+        ],
+        "type": "object"
+      },
+      "DAStatusResponse": {
+        "description": "Response payload for DA task status query.",
+        "example": {
+          "error": null,
+          "status": "running",
+          "task_id": "5f3e8f2a-6f5f-45a6-a093-e7f4db7d2f0c",
+          "uuid": "7b2c2fb2-67f2-4d07-9d5a-8d2fa9a9b4be"
+        },
+        "properties": {
+          "uuid": {
+            "title": "Uuid",
+            "type": "string"
+          },
+          "task_id": {
+            "description": "DA task id returned by /da/explain or /da/enumerate.",
+            "title": "Task Id",
+            "type": "string"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Error"
+          }
+        },
+        "required": [
+          "uuid",
+          "task_id",
+          "status"
+        ],
+        "type": "object"
+      },
+      "DAResultResponse": {
+        "description": "Response payload containing DA result URL.",
+        "example": {
+          "expires_in": 3600,
+          "result_url": "https://s3.amazonaws.com/example-bucket/presigned-result-url",
+          "status": "succeeded",
+          "task_id": "5f3e8f2a-6f5f-45a6-a093-e7f4db7d2f0c",
+          "uuid": "7b2c2fb2-67f2-4d07-9d5a-8d2fa9a9b4be"
+        },
+        "properties": {
+          "uuid": {
+            "title": "Uuid",
+            "type": "string"
+          },
+          "task_id": {
+            "description": "DA task id returned by /da/explain or /da/enumerate.",
+            "title": "Task Id",
+            "type": "string"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          },
+          "result_url": {
+            "title": "Result Url",
+            "type": "string"
+          },
+          "expires_in": {
+            "title": "Expires In",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "uuid",
+          "task_id",
+          "status",
+          "result_url",
+          "expires_in"
+        ],
+        "type": "object"
+      },
+      "DADeleteResponse": {
+        "description": "Response payload after DA task deletion.",
+        "example": {
+          "status": "deleted",
+          "task_id": "5f3e8f2a-6f5f-45a6-a093-e7f4db7d2f0c",
+          "uuid": "7b2c2fb2-67f2-4d07-9d5a-8d2fa9a9b4be"
+        },
+        "properties": {
+          "uuid": {
+            "title": "Uuid",
+            "type": "string"
+          },
+          "task_id": {
+            "description": "DA task id returned by /da/explain or /da/enumerate.",
+            "title": "Task Id",
+            "type": "string"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "uuid",
+          "task_id",
+          "status"
+        ],
+        "type": "object"
+      },
+      "AgentMessageRequest": {
+        "additionalProperties": false,
+        "description": "Single message item for chat requests.",
+        "properties": {
+          "role": {
+            "minLength": 1,
+            "title": "Role",
+            "type": "string"
+          },
+          "content": {
+            "title": "Content",
+            "type": "string"
+          }
+        },
+        "required": [
+          "role",
+          "content"
+        ],
+        "type": "object"
+      },
+      "AgentChatRequest": {
+        "additionalProperties": false,
+        "description": "Request payload for ``POST /agent/chat``.",
+        "properties": {
+          "session_id": {
+            "minLength": 1,
+            "title": "Session Id",
+            "type": "string"
+          },
+          "messages": {
+            "items": {
+              "$ref": "#/components/schemas/AgentMessageRequest"
+            },
+            "minItems": 1,
+            "title": "Messages",
+            "type": "array"
+          }
+        },
+        "required": [
+          "session_id",
+          "messages"
+        ],
+        "type": "object"
+      },
+      "AgentPassthroughResponse": {
+        "additionalProperties": true,
+        "description": "Generic response envelope from in-process agent runtime.",
+        "properties": {
+          "status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Status"
+          },
+          "message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Message"
+          },
+          "current_step": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Current Step"
+          },
+          "session_state": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Session State"
+          }
+        },
+        "type": "object"
+      },
+      "AgentApproveRequest": {
+        "additionalProperties": false,
+        "description": "Request payload for ``POST /agent/approve``.",
+        "properties": {
+          "session_id": {
+            "minLength": 1,
+            "title": "Session Id",
+            "type": "string"
+          },
+          "approved": {
+            "default": true,
+            "title": "Approved",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "session_id"
+        ],
+        "type": "object"
+      },
+      "AgentNextRequest": {
+        "additionalProperties": false,
+        "description": "Request payload for ``POST /agent/next``.",
+        "properties": {
+          "session_id": {
+            "minLength": 1,
+            "title": "Session Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "session_id"
+        ],
+        "type": "object"
+      },
+      "AgentCreateSessionRequest": {
+        "additionalProperties": false,
+        "description": "Request payload for ``POST /agent/session``.",
+        "properties": {},
+        "type": "object"
+      },
+      "DAExplainArtifact": {
+        "type": "object",
+        "description": "DA explain artifact saved by worker and downloaded from `result_url`. Top-level metadata wraps an algorithm-specific `result` object.",
+        "required": [
+          "uuid",
+          "task_id",
+          "mode",
+          "status",
+          "timestamp",
+          "result"
+        ],
+        "properties": {
+          "uuid": {
+            "type": "string",
+            "description": "Session UUID."
+          },
+          "task_id": {
+            "type": "string",
+            "description": "DA task identifier."
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "explain"
+            ],
+            "description": "DA mode."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "succeeded"
+            ],
+            "description": "Task outcome."
+          },
+          "timestamp": {
+            "type": "string",
+            "description": "ISO8601 UTC completion timestamp."
+          },
+          "result": {
+            "type": "object",
+            "description": "Explain output returned by CationExplainer.explain_action.",
+            "properties": {
+              "is_solved": {
+                "type": "boolean",
+                "description": "Whether thresholds are satisfied by found action."
+              },
+              "z": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "Current full feature vector."
+              },
+              "x": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "Actionable feature sub-vector."
+              },
+              "y": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "Current target values."
+              },
+              "threshold": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "Target thresholds used for explain."
+              },
+              "action": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "Recommended feature deltas (all zeros when no action found)."
+              },
+              "effect": {
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "description": "Estimated effect on targets for each candidate action."
+              },
+              "z_cf": {
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "description": "Counterfactual full feature vectors."
+              },
+              "x_cf": {
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "description": "Counterfactual actionable vectors."
+              },
+              "y_cf": {
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "description": "Counterfactual target values."
+              },
+              "cost": {
+                "type": "number",
+                "description": "Optimization cost of selected action."
+              },
+              "dist": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "Distance metrics per candidate."
+              },
+              "obj": {
+                "type": "number",
+                "description": "Objective value; very large often means unsolved."
+              },
+              "support": {
+                "type": "array",
+                "items": {},
+                "description": "Action support set (algorithm-specific)."
+              },
+              "support_effect": {
+                "type": "array",
+                "items": {},
+                "description": "Effect support set (algorithm-specific)."
+              },
+              "time": {
+                "type": "number",
+                "description": "Solver elapsed time in seconds."
+              }
+            },
+            "additionalProperties": true
+          }
+        },
+        "example": {
+          "uuid": "f2deb784-ccc0-4711-876e-347cd7ce53bf",
+          "task_id": "f548a0b1-8574-456a-af21-2132784e7205",
+          "mode": "explain",
+          "status": "succeeded",
+          "timestamp": "2026-02-26T22:31:06.016699+00:00",
+          "result": {
+            "is_solved": false,
+            "z": [
+              0.5,
+              1.2,
+              2.1,
+              1.0,
+              0.0,
+              0.0
+            ],
+            "y": [
+              0.5
+            ],
+            "threshold": [
+              0.8
+            ],
+            "action": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "obj": 10000000000000.0,
+            "time": 0.0021
+          }
+        }
+      },
+      "DAEnumerateArtifact": {
+        "type": "object",
+        "description": "DA enumerate artifact saved by worker and downloaded from `result_url`. Top-level metadata wraps a list of explain-like `results`.",
+        "required": [
+          "uuid",
+          "task_id",
+          "mode",
+          "status",
+          "timestamp",
+          "results"
+        ],
+        "properties": {
+          "uuid": {
+            "type": "string",
+            "description": "Session UUID."
+          },
+          "task_id": {
+            "type": "string",
+            "description": "DA task identifier."
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "enumerate"
+            ],
+            "description": "DA mode."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "succeeded"
+            ],
+            "description": "Task outcome."
+          },
+          "timestamp": {
+            "type": "string",
+            "description": "ISO8601 UTC completion timestamp."
+          },
+          "results": {
+            "type": "array",
+            "description": "List of candidate actions; may be empty if no feasible action.",
+            "items": {
+              "type": "object",
+              "description": "Explain output returned by CationExplainer.explain_action.",
+              "properties": {
+                "is_solved": {
+                  "type": "boolean",
+                  "description": "Whether thresholds are satisfied by found action."
+                },
+                "z": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  },
+                  "description": "Current full feature vector."
+                },
+                "x": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  },
+                  "description": "Actionable feature sub-vector."
+                },
+                "y": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  },
+                  "description": "Current target values."
+                },
+                "threshold": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  },
+                  "description": "Target thresholds used for explain."
+                },
+                "action": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  },
+                  "description": "Recommended feature deltas (all zeros when no action found)."
+                },
+                "effect": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  },
+                  "description": "Estimated effect on targets for each candidate action."
+                },
+                "z_cf": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  },
+                  "description": "Counterfactual full feature vectors."
+                },
+                "x_cf": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  },
+                  "description": "Counterfactual actionable vectors."
+                },
+                "y_cf": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  },
+                  "description": "Counterfactual target values."
+                },
+                "cost": {
+                  "type": "number",
+                  "description": "Optimization cost of selected action."
+                },
+                "dist": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  },
+                  "description": "Distance metrics per candidate."
+                },
+                "obj": {
+                  "type": "number",
+                  "description": "Objective value; very large often means unsolved."
+                },
+                "support": {
+                  "type": "array",
+                  "items": {},
+                  "description": "Action support set (algorithm-specific)."
+                },
+                "support_effect": {
+                  "type": "array",
+                  "items": {},
+                  "description": "Effect support set (algorithm-specific)."
+                },
+                "time": {
+                  "type": "number",
+                  "description": "Solver elapsed time in seconds."
+                }
+              },
+              "additionalProperties": true
+            }
+          }
+        },
+        "example": {
+          "uuid": "f2deb784-ccc0-4711-876e-347cd7ce53bf",
+          "task_id": "f548a0b1-8574-456a-af21-2132784e7205",
+          "mode": "enumerate",
+          "status": "succeeded",
+          "timestamp": "2026-02-26T22:31:06.016699+00:00",
+          "results": [
+            {
+              "is_solved": true,
+              "z": [
+                0.5,
+                1.2,
+                2.1
+              ],
+              "x": [
+                0.5,
+                1.2
+              ],
+              "y": [
+                0.5
+              ],
+              "threshold": [
+                0.8
+              ],
+              "action": [
+                0.3,
+                0.0,
+                0.1
+              ],
+              "effect": [
+                [
+                  0.02,
+                  0.01,
+                  0.0
+                ]
+              ],
+              "z_cf": [
+                [
+                  0.82,
+                  1.21,
+                  2.2
+                ]
+              ],
+              "x_cf": [
+                [
+                  0.82,
+                  1.21
+                ]
+              ],
+              "y_cf": [
+                [
+                  0.81
+                ]
+              ],
+              "cost": 0.4,
+              "dist": [
+                0.0
+              ],
+              "obj": 0.4,
+              "support": [
+                0,
+                2
+              ],
+              "support_effect": [
+                0,
+                1
+              ],
+              "time": 0.0049
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -42,8 +42,11 @@ Use the client as an async context manager:
 
    asyncio.run(main())
 
-Contents
---------
+HTTP API (OpenAPI)
+------------------
+
+The platform REST API is documented with :doc:`openapi` (machine-readable
+``openapi.json``, also linked from the API spec’s ``externalDocs``).
 
 .. toctree::
    :maxdepth: 2
@@ -58,6 +61,7 @@ Contents
    :maxdepth: 2
    :caption: Additional Information
 
+   openapi
    examples
    changelog
    troubleshooting

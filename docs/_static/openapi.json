@@ -5,6 +5,10 @@
     "version": "1.17.1",
     "description": "Generated from Terraform routes and Pydantic models in scripts/openapi_models.py."
   },
+  "externalDocs": {
+    "description": "Python SDK documentation",
+    "url": "https://tsu-mvpe.github.io/causal_ai_sdk/"
+  },
   "paths": {
     "/kg/init": {
       "post": {

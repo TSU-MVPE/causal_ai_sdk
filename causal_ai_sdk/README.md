@@ -167,11 +167,3 @@ Optional development dependencies (install with `pip install causal-ai-sdk[dev]`
 
 - **pytest**, **pytest-asyncio**, **pytest-cov** — Testing
 - **respx** — HTTP mocking for tests
-
-## License
-
-See [LICENSE](LICENSE) for details.
-
-## Support
-
-For issues, questions, or contributions, please refer to the main project repository.

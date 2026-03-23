@@ -6,16 +6,16 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Client &mdash; Causal AI Python SDK 1.24.0 Documentation</title>
+  <title>Client &mdash; Causal AI Python SDK 1.24.1 Documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=364adad2"></script>
-      <script src="../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/documentation_options.js?v=92325ecb"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -226,7 +226,7 @@
 <p>Main client entry point.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="causal_ai_sdk.client.CausalAIClient">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">causal_ai_sdk.client.</span></span><span class="sig-name descname"><span class="pre">CausalAIClient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">http_client</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/client.html#CausalAIClient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.client.CausalAIClient" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">causal_ai_sdk.client.</span></span><span class="sig-name descname"><span class="pre">CausalAIClient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">http_client</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/client.html#CausalAIClient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.client.CausalAIClient" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Main client for Causal AI SDK.</p>
 <p>This client provides a unified interface to access all services.
@@ -258,7 +258,7 @@ initialization and configuration.</p>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="causal_ai_sdk.client.CausalAIClient.__aenter__">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__aenter__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/client.html#CausalAIClient.__aenter__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.client.CausalAIClient.__aenter__" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">__aenter__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/client.html#CausalAIClient.__aenter__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.client.CausalAIClient.__aenter__" title="Link to this definition"></a></dt>
 <dd><p>Async context manager entry.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -272,7 +272,7 @@ initialization and configuration.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="causal_ai_sdk.client.CausalAIClient.__aexit__">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__aexit__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exc_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exc_val</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exc_tb</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/client.html#CausalAIClient.__aexit__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.client.CausalAIClient.__aexit__" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">__aexit__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exc_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exc_val</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exc_tb</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/client.html#CausalAIClient.__aexit__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.client.CausalAIClient.__aexit__" title="Link to this definition"></a></dt>
 <dd><p>Async context manager exit.</p>
 <p>Closes the HTTP client if we own it.</p>
 <dl class="field-list simple">
@@ -308,7 +308,7 @@ close it when done).</p></li>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="causal_ai_sdk.client.CausalAIClient.cd">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cd</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="services.html#causal_ai_sdk.services.cd_service.CDService" title="causal_ai_sdk.services.cd_service.CDService"><span class="pre">CDService</span></a></em><a class="reference internal" href="../_modules/causal_ai_sdk/client.html#CausalAIClient.cd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.client.CausalAIClient.cd" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">cd</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="services.html#causal_ai_sdk.services.cd_service.CDService" title="causal_ai_sdk.services.cd_service.CDService"><span class="pre">CDService</span></a></span><a class="reference internal" href="../_modules/causal_ai_sdk/client.html#CausalAIClient.cd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.client.CausalAIClient.cd" title="Link to this definition"></a></dt>
 <dd><p>Causal Discovery service.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -322,7 +322,7 @@ close it when done).</p></li>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="causal_ai_sdk.client.CausalAIClient.da">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">da</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="services.html#causal_ai_sdk.services.da_service.DAService" title="causal_ai_sdk.services.da_service.DAService"><span class="pre">DAService</span></a></em><a class="reference internal" href="../_modules/causal_ai_sdk/client.html#CausalAIClient.da"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.client.CausalAIClient.da" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">da</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="services.html#causal_ai_sdk.services.da_service.DAService" title="causal_ai_sdk.services.da_service.DAService"><span class="pre">DAService</span></a></span><a class="reference internal" href="../_modules/causal_ai_sdk/client.html#CausalAIClient.da"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.client.CausalAIClient.da" title="Link to this definition"></a></dt>
 <dd><p>Decision Analysis service.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -336,7 +336,7 @@ close it when done).</p></li>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="causal_ai_sdk.client.CausalAIClient.kg">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">kg</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="services.html#causal_ai_sdk.services.kg_service.KGService" title="causal_ai_sdk.services.kg_service.KGService"><span class="pre">KGService</span></a></em><a class="reference internal" href="../_modules/causal_ai_sdk/client.html#CausalAIClient.kg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.client.CausalAIClient.kg" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">kg</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="services.html#causal_ai_sdk.services.kg_service.KGService" title="causal_ai_sdk.services.kg_service.KGService"><span class="pre">KGService</span></a></span><a class="reference internal" href="../_modules/causal_ai_sdk/client.html#CausalAIClient.kg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.client.CausalAIClient.kg" title="Link to this definition"></a></dt>
 <dd><p>Knowledge Graph service.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -355,7 +355,7 @@ close it when done).</p></li>
 <p>Configuration management.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="causal_ai_sdk.config.Config">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">causal_ai_sdk.config.</span></span><span class="sig-name descname"><span class="pre">Config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">120</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/config.html#Config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.config.Config" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">causal_ai_sdk.config.</span></span><span class="sig-name descname"><span class="pre">Config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">120</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/causal_ai_sdk/config.html#Config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#causal_ai_sdk.config.Config" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Configuration class for Causal AI SDK.</p>
 <p>Manages API key, base URL, and other configuration settings.

@@ -24,6 +24,7 @@ async def poll_until_ready_or_fail(
     timeout_error_message: Optional[str] = None,
     retry_exceptions: Optional[Tuple[type, ...]] = None,
     retry_if: Optional[Callable[[Exception], bool]] = None,
+    on_poll: Optional[Callable[[float, T], None]] = None,
 ) -> T:
     """Poll until state is ready or failed; on failure call on_failed (should raise).
 
@@ -40,6 +41,8 @@ async def poll_until_ready_or_fail(
         timeout_error_message (Optional[str]): Message for PollingTimeoutError.
         retry_exceptions (Optional[Tuple[type, ...]]): Exception types to catch and retry.
         retry_if (Optional[Callable[[Exception], bool]]): Retry only when this returns True.
+        on_poll (Optional[Callable[[float, T], None]]): If set, called each poll with
+            (elapsed_sec, state).
 
     Returns:
         The final state when is_ready (type T).  # noqa: DAR003
@@ -70,6 +73,8 @@ async def poll_until_ready_or_fail(
             return state
 
         elapsed = loop.time() - start_time
+        if on_poll is not None:
+            on_poll(elapsed, state)
         if elapsed >= timeout:
             raise PollingTimeoutError(message)
         await asyncio.sleep(interval)

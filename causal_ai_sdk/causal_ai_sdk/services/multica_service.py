@@ -2,6 +2,7 @@
 
 import io
 import json
+import logging
 import zipfile
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple, Union
@@ -17,6 +18,11 @@ from causal_ai_sdk.services.base_cd_service import BaseCDService
 from causal_ai_sdk.utils.dataset_schema import validate_columns_data
 from causal_ai_sdk.utils.polling import poll_until_ready_or_fail
 from pydantic import ValidationError as PydanticValidationError
+
+logger = logging.getLogger(__name__)
+
+# Log matching progress every this many seconds (avoids spamming when polling every 3s)
+_MATCHING_PROGRESS_LOG_INTERVAL = 30
 
 
 class MultiCaService(BaseCDService):
@@ -202,6 +208,7 @@ class MultiCaService(BaseCDService):
         timeout: int = 300,
         interval: int = 3,
         matching_task_id: Optional[str] = None,
+        retry_on_5xx: bool = True,
     ) -> Dict[str, Any]:
         """Wait for MultiCa matching computation to complete (with automatic polling).
 
@@ -211,6 +218,8 @@ class MultiCaService(BaseCDService):
             interval (int): Time between polls in seconds (default: 3)
             matching_task_id (Optional[str]): Matching task ID from start_multica_matching
                 (required by API)
+            retry_on_5xx (bool): If True, retry on 500/503 until timeout; if False, raise
+                on first 5xx so callers can see the API error body immediately (default: True).
 
         Returns:
             Dict: Final matching result
@@ -227,6 +236,17 @@ class MultiCaService(BaseCDService):
                 response_data=None,
             )
 
+        last_log = [0.0]
+
+        def on_poll(elapsed: float, state: Dict[str, Any]) -> None:
+            if elapsed - last_log[0] >= _MATCHING_PROGRESS_LOG_INTERVAL:
+                logger.info(
+                    "MultiCa matching in progress (%.0fs elapsed, status=%s)...",
+                    elapsed,
+                    state.get("status", "?"),
+                )
+                last_log[0] = elapsed
+
         return await poll_until_ready_or_fail(
             check_func=check,
             is_ready=lambda r: r.get("status") == "completed",
@@ -236,7 +256,12 @@ class MultiCaService(BaseCDService):
             interval=interval,
             timeout_error_message=f"Matching did not complete within timeout ({timeout}s)",
             retry_exceptions=(APIError,),
-            retry_if=lambda e: getattr(e, "status_code", None) in (500, 503),
+            retry_if=(
+                (lambda e: getattr(e, "status_code", None) in (500, 503))
+                if retry_on_5xx
+                else (lambda e: False)
+            ),
+            on_poll=on_poll,
         )
 
     async def start_multica_matching(

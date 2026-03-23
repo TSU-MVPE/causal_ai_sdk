@@ -119,6 +119,7 @@ class CDService(BaseService):
         timeout: int = 300,
         interval: int = 3,
         matching_task_id: Optional[str] = None,
+        retry_on_5xx: bool = True,
     ) -> Dict[str, Any]:
         """Wait for matching computation to complete (with automatic polling).
 
@@ -129,6 +130,8 @@ class CDService(BaseService):
             interval (int): Time between polls in seconds (default: 3)
             matching_task_id (Optional[str]): Matching task ID from start_*_matching
                 (required for API)
+            retry_on_5xx (bool): If True, retry on 500/503; if False, raise on first 5xx
+                (default: True).
 
         Returns:
             Dict: Final matching result
@@ -138,7 +141,7 @@ class CDService(BaseService):
         """
         if mode == "multica":
             return await self._multica_service.wait_for_matching(
-                session_uuid, timeout, interval, matching_task_id
+                session_uuid, timeout, interval, matching_task_id, retry_on_5xx=retry_on_5xx
             )
         elif mode == "trackr":
             return await self._trackr_service.wait_for_matching(

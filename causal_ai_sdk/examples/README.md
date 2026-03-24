@@ -63,36 +63,30 @@ Current release enables only one target per request (`len(targets) == 1`).
 
 ### Prerequisites
 
-Follow the setup steps in the main and component READMEs (install from the **MVP** folder, not from each subdirectory):
+Install the SDK and required optional dependency first:
 
-- **MVP**: [MVP/README.md](../../README.md) – main project, LocalStack, and development environment
-- **Causal AI SDK**: [MVP/causal_ai_sdk/README.md](../README.md) – SDK install (`pip install -e causal_ai_sdk` from MVP)
-- **API key manager**: [MVP/api_key_manager/README.md](../../api_key_manager/README.md) – for automatic API key creation (optional; included when installing MVP with `pip install -e .` from MVP)
+- **Causal AI SDK**: [SDK README](../README.md)
+- **python-dotenv** (for `.env` loading in examples): `pip install python-dotenv`
+- **API key**: required via environment variable (`CAUSAL_AI_API_KEY`)
 
-Then (optional) set environment variables:
+Set environment variables (or place the same values in `examples/.env`):
 
 ```bash
-export CAUSAL_AI_API_KEY="your-api-key"   # Optional: auto-created if not set
-export CAUSAL_AI_BASE_URL="https://..."  # Optional: auto-detected from Terraform
+export CAUSAL_AI_API_KEY="your-api-key"   # Required
+export CAUSAL_AI_BASE_URL="https://..."   # Required
 ```
 
-### Automatic Configuration
+### Configuration Behavior
 
-All examples automatically:
+All examples:
 
-- **Detect LocalStack**: If LocalStack is running (detected via Docker or port 4566), the examples automatically configure:
-  - `AWS_ENDPOINT_URL=http://localhost:4566`
-  - `AWS_ACCESS_KEY_ID=test`
-  - `AWS_SECRET_ACCESS_KEY=test`
-  
-- **Resolve API Gateway URL**: Automatically resolves from Terraform outputs or environment variables
-
-- **Create Temporary API Keys**: If `CAUSAL_AI_API_KEY` is not set, automatically creates a temporary API key using `cai-keymgr` and cleans it up after execution
+- **Use provided API base URL**: Read `CAUSAL_AI_BASE_URL` from environment or `examples/.env`
+- **Use provided API key**: Read `CAUSAL_AI_API_KEY` from environment or `examples/.env`
 
 ### Run the Examples
 
 ```bash
-cd MVP/causal_ai_sdk/examples
+cd examples
 
 # Knowledge Graph Service
 python kg_service_example.py
@@ -110,5 +104,4 @@ python cd_trackr_example.py
 - The SDK uses async context managers for proper resource management
 - All API calls are asynchronous and should be awaited
 - Error handling is included to demonstrate proper exception handling
-- Temporary API keys are automatically cleaned up after execution
-- LocalStack credentials are automatically configured when LocalStack is detected
+- API credentials can be provided via shell environment or `examples/.env`

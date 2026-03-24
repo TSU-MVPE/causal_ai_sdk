@@ -1,6 +1,6 @@
 # Causal AI SDK
 
-Python SDK for the Causal AI MVP Platform, providing a simple and intuitive interface to interact with Knowledge Graph and Causal Discovery services.
+Python SDK for the Causal AI Platform, providing a simple and intuitive interface to interact with Knowledge Graph and Causal Discovery services.
 
 ## Features
 
@@ -127,12 +127,12 @@ The SDK includes a `contracts` layer that serves two purposes:
 
 - **Runtime consistency**: core service calls (`kg`, `multica`, `trackr`) build paths and validate
   request payloads through shared contract definitions.
-- **Static guardrail**: a fast test compares SDK contract models with `MVP/openapi.json` to catch
-  drift before runtime.
+- **Static guardrail**: a fast test compares SDK contract models with the OpenAPI snapshot used by
+  the SDK tests to catch drift before runtime.
 
 ### Quick local check
 
-Run this from the `MVP` directory:
+Run this from the `causal_ai_sdk` directory:
 
 ```bash
 pytest tests/api/test_sdk_openapi_contract_static.py -q

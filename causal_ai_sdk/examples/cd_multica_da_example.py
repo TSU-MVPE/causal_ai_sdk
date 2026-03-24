@@ -19,9 +19,8 @@ from typing import Any, Dict, List, Tuple
 import httpx
 from causal_ai_sdk import CausalAIClient
 from helpers import (
-    _delete_api_key,
-    _get_api_key,
-    _resolve_api_base_url,
+    get_api_key_from_env,
+    get_base_url_from_env,
     get_sdk_test_data_dir,
 )
 
@@ -229,13 +228,13 @@ async def run_multica_da_workflow(client: CausalAIClient, test_data_dir: Path) -
 
 async def main() -> None:
     """Run MultiCa + DA example (mirrors test-e2e-multica-da.sh)."""
-    base_url = _resolve_api_base_url()
+    base_url = get_base_url_from_env()
     if not base_url:
-        print("\n[ERROR] Could not determine API Gateway URL. Set CAUSAL_AI_BASE_URL.")
+        print("\n[ERROR] No API base URL. Set CAUSAL_AI_BASE_URL.")
         sys.exit(1)
-    api_key, temp_company_name = _get_api_key()
+    api_key = get_api_key_from_env()
     if not api_key:
-        print("\n[ERROR] No API key. Set CAUSAL_AI_API_KEY or use cai-keymgr.")
+        print("\n[ERROR] No API key. Set CAUSAL_AI_API_KEY.")
         sys.exit(1)
     print("=" * 60)
     print("E2E: MultiCa + DA Explain")
@@ -243,19 +242,15 @@ async def main() -> None:
     print(f"Base URL: {base_url}")
     print("=" * 60)
     test_data_dir = get_sdk_test_data_dir()
-    try:
-        async with CausalAIClient(api_key=api_key, base_url=base_url) as client:
-            success = await run_multica_da_workflow(client, test_data_dir)
-        print("\n" + "=" * 60)
-        if success:
-            print("All E2E Tests Passed")
-            print("Validated flow: MultiCa CD result -> DA explain")
-        else:
-            print("Summary: [ERROR] FAILED/SKIPPED")
-        print("=" * 60)
-    finally:
-        if temp_company_name:
-            _delete_api_key(temp_company_name)
+    async with CausalAIClient(api_key=api_key, base_url=base_url) as client:
+        success = await run_multica_da_workflow(client, test_data_dir)
+    print("\n" + "=" * 60)
+    if success:
+        print("All E2E Tests Passed")
+        print("Validated flow: MultiCa CD result -> DA explain")
+    else:
+        print("Summary: [ERROR] FAILED/SKIPPED")
+    print("=" * 60)
 
 
 if __name__ == "__main__":

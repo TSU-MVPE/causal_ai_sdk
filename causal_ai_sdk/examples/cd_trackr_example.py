@@ -20,8 +20,6 @@ This example is based on the test-cd-trackr.sh script workflow.
 import asyncio
 import json
 import logging
-import os
-import subprocess
 import sys
 from pathlib import Path
 from typing import Optional
@@ -29,111 +27,9 @@ from typing import Optional
 import httpx
 from causal_ai_sdk import CausalAIClient
 from causal_ai_sdk.models.cd import UploadedData
-from helpers import _delete_api_key, _get_api_key, get_sdk_test_data_dir
+from helpers import get_api_key_from_env, get_base_url_from_env, get_sdk_test_data_dir
 
 logger = logging.getLogger(__name__)
-
-
-# Reuse helper functions (duplicated for standalone execution)
-def _terraform_output(name: str, terraform_dir: Optional[str] = None) -> str:
-    """Get Terraform output value.
-
-    Args:
-        name (str): Terraform output name
-        terraform_dir (Optional[str]): Optional Terraform directory path
-
-    Returns:
-        str: Terraform output value
-    """
-    if terraform_dir is None:
-        mvp_dir = Path(__file__).parent.parent.parent
-        terraform_dir = str(mvp_dir / "terraform")
-    try:
-        result = subprocess.run(
-            ["terraform", "output", "-raw", name],
-            cwd=str(terraform_dir),
-            capture_output=True,
-            text=True,
-            check=False,
-        )
-        if result.returncode == 0:
-            return result.stdout.strip()
-    except Exception:
-        pass
-    return ""
-
-
-def _is_localstack_running() -> bool:
-    """Check if LocalStack is running.
-
-    Returns:
-        bool: True if LocalStack is running, False otherwise
-    """
-    endpoint_url = os.getenv("AWS_ENDPOINT_URL", "")
-    if endpoint_url and ":4566" in endpoint_url:
-        return True
-    try:
-        result = subprocess.run(
-            ["docker", "ps", "--filter", "name=localstack", "--format", "{{.Names}}"],
-            capture_output=True,
-            text=True,
-            check=False,
-        )
-        if result.returncode == 0 and result.stdout.strip():
-            return True
-    except Exception:
-        pass
-    try:
-        import socket
-
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.settimeout(1)
-        port_result = sock.connect_ex(("localhost", 4566))
-        sock.close()
-        if port_result == 0:
-            return True
-    except Exception:
-        pass
-    return False
-
-
-def _resolve_api_base_url() -> str:
-    """Resolve API Gateway base URL from Terraform or environment.
-
-    Returns:
-        str: API Gateway base URL
-    """
-    base_url = os.getenv("CAUSAL_AI_BASE_URL")
-    if base_url:
-        return base_url.rstrip("/")
-    endpoint_url = os.getenv("AWS_ENDPOINT_URL", "").rstrip("/")
-    is_localstack = _is_localstack_running() or (":4566" in endpoint_url if endpoint_url else False)
-    api_id = _terraform_output("api_gateway_id")
-    if not api_id:
-        return ""
-    if is_localstack:
-        if endpoint_url:
-            endpoint_base = endpoint_url.rstrip("/")
-            if "://" in endpoint_base:
-                localstack_host = endpoint_base.split("://")[1].split(":")[0]
-            else:
-                localstack_host = "localhost"
-        else:
-            localstack_host = "localhost"
-        api_gateway_url = _terraform_output("api_gateway_url")
-        if api_gateway_url:
-            stage = api_gateway_url.rstrip("/").split("/")[-1] or "local"
-        else:
-            stage = "local"
-        return f"http://{localstack_host}:4566/restapis/{api_id}/{stage}/_user_request_"
-    else:
-        api_endpoint = _terraform_output("api_gateway_endpoint")
-        if api_endpoint:
-            return api_endpoint.rstrip("/")
-        api_gateway_url = _terraform_output("api_gateway_url")
-        if api_gateway_url:
-            return api_gateway_url.rstrip("/")
-    return ""
 
 
 # Polling is now handled by SDK's wait_for_matching and wait_for_task methods
@@ -484,32 +380,18 @@ async def test_trackr_csv(
 
 async def main():
     """Main example function demonstrating TraCKR workflow with multiple format tests."""
-    # Track if we created a temporary API key for cleanup
-    temp_company_name = None
+    # Get API Gateway URL from Terraform or environment
+    base_url = get_base_url_from_env()
+    if not base_url:
+        print("[ERROR] No API base URL. Please set CAUSAL_AI_BASE_URL environment variable.")
+        sys.exit(1)
 
-    try:
-        # Get API Gateway URL from Terraform or environment
-        base_url = _resolve_api_base_url()
-        if not base_url:
-            print(
-                "[ERROR] Could not determine API Gateway URL.\n"
-                "Please either:\n"
-                "  1. Set CAUSAL_AI_BASE_URL environment variable, or\n"
-                "  2. Ensure Terraform is configured and outputs are available, or\n"
-                "  3. Set AWS_ENDPOINT_URL for LocalStack (e.g., http://localhost:4566)"
-            )
-            sys.exit(1)
-
-        # Get API key from environment or create temporary one
-        api_key, temp_company_name = _get_api_key()
-        if not api_key:
-            print(
-                "\n[ERROR] No API key available.\n"
-                "Please either:\n"
-                "  1. Set CAUSAL_AI_API_KEY environment variable, or\n"
-                "  2. Ensure AWS credentials are configured for cai-keymgr"
-            )
-            sys.exit(1)
+    api_key = get_api_key_from_env()
+    if not api_key:
+        print(
+            "\n[ERROR] No API key available.\n" "Please set CAUSAL_AI_API_KEY environment variable."
+        )
+        sys.exit(1)
 
         print("=" * 60)
         print("TraCKR Causal Discovery Service Example")
@@ -518,41 +400,33 @@ async def main():
         print(f"API Key: {api_key[:15]}..." if len(api_key) > 15 else f"API Key: {api_key}")
         print("=" * 60)
 
-        # Get test data directory
-        test_data_dir = get_sdk_test_data_dir()
+    # Get test data directory
+    test_data_dir = get_sdk_test_data_dir()
 
-        # Use async context manager for proper resource management
-        async with CausalAIClient(api_key=api_key, base_url=base_url) as client:
-            results = {}
+    # Use async context manager for proper resource management
+    async with CausalAIClient(api_key=api_key, base_url=base_url) as client:
+        results = {}
 
-            # Test JSON format
-            success, session_uuid = await test_trackr_json(client, test_data_dir)
-            results["JSON"] = success
+        # Test JSON format
+        success, session_uuid = await test_trackr_json(client, test_data_dir)
+        results["JSON"] = success
 
-            # Test CSV format
-            success, session_uuid = await test_trackr_csv(client, test_data_dir)
-            results["CSV"] = success
+        # Test CSV format
+        success, session_uuid = await test_trackr_csv(client, test_data_dir)
+        results["CSV"] = success
 
-            # Print summary
-            print("\n" + "=" * 60)
-            print("Test Summary")
-            print("=" * 60)
-            for format_name, success in results.items():
-                status = "[OK] PASSED" if success else "[ERROR] FAILED/SKIPPED"
-                print(f"  {format_name}: {status}")
+        # Print summary
+        print("\n" + "=" * 60)
+        print("Test Summary")
+        print("=" * 60)
+        for format_name, success in results.items():
+            status = "[OK] PASSED" if success else "[ERROR] FAILED/SKIPPED"
+            print(f"  {format_name}: {status}")
 
-            total_tests = len(results)
-            passed_tests = sum(1 for s in results.values() if s)
-            print(f"\nTotal: {passed_tests}/{total_tests} tests passed")
-            print("=" * 60)
-
-    finally:
-        # Clean up temporary API key if we created one
-        if temp_company_name:
-            print("\n" + "=" * 60)
-            print("Cleaning Up")
-            print("=" * 60)
-            _delete_api_key(temp_company_name)
+        total_tests = len(results)
+        passed_tests = sum(1 for s in results.values() if s)
+        print(f"\nTotal: {passed_tests}/{total_tests} tests passed")
+        print("=" * 60)
 
 
 if __name__ == "__main__":

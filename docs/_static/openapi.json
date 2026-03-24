@@ -2,7 +2,7 @@
   "openapi": "3.0.3",
   "info": {
     "title": "Causal AI MVP API",
-    "version": "1.28.0",
+    "version": "1.28.1",
     "description": "Generated from Terraform routes and Pydantic models in scripts/openapi_models.py."
   },
   "externalDocs": {

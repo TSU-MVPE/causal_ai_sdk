@@ -14,7 +14,6 @@ class EndpointContract:
     method: str
     path: str
     request_model: Optional[Type[BaseModel]] = None
-    response_model: Optional[Type[BaseModel]] = None
     openapi_request_schema: Optional[str] = None
     openapi_response_schema: Optional[str] = None
     request_sdk_only_fields: Tuple[str, ...] = ()

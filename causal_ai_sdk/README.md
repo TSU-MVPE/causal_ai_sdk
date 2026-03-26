@@ -5,7 +5,8 @@ Python SDK for the Causal AI Platform, providing a simple and intuitive interfac
 ## Features
 
 - **Knowledge Graph Service**: Create, manage, and query causal knowledge graphs
-- **Causal Discovery Service**: Run MultiCa and TraCKR algorithms for causal discovery
+- **Causal Discovery Service**: Run MultiCa, TraCKR, and LiNGAM algorithms; column matching for MultiCa and TraCKR
+- **Decision Analysis Service**: Explain and enumerate tasks over a completed CD result
 - **File Format Support**: Datasets (CD) and knowledge graphs: CSV and JSON.
 - **Type Safety**: Full type hints for better IDE support and code reliability
 - **Error Handling**: Comprehensive exception hierarchy for clear error messages
@@ -53,27 +54,21 @@ async def main():
     ) as client:
         # Initialize a session
         session = await client.kg.init_session()
-        print(f"Session UUID: {session.uuid}")
+        session_uuid = session["uuid"]
+        print(f"Session UUID: {session_uuid}")
 
-        # Get upload URL for a knowledge graph file
-        upload_url = await client.kg.get_upload_url(session.uuid, filename="graph.json")
-
-        # Upload file to S3 (using the presigned URL)
-        # ... upload logic ...
-
-        # Register the knowledge graph
-        kg = await client.kg.add_kg(
-            session_uuid=session.uuid,
+        # Upload a KG file (JSON/CSV)
+        kg = await client.kg.upload_kg_from_file(
+            session_uuid=session_uuid,
+            file_path="graph.json",
             title="My Knowledge Graph",
-            columns=["col1", "col2", "col3"],
-            s3_key=upload_url.s3_key
         )
 
         # List all knowledge graphs in the session
-        kg_list = await client.kg.list_kg(session.uuid)
+        kg_list = await client.kg.list_kg(session_uuid)
 
         # Get a specific knowledge graph
-        kg_detail = await client.kg.get_kg(session.uuid, kg_id=kg.id)
+        kg_detail = await client.kg.get_kg(session_uuid, kg_id=kg["id"])
 
 
 if __name__ == "__main__":
@@ -106,27 +101,38 @@ async with CausalAIClient(api_key="...", base_url="...") as client:
         task["task_id"], session_uuid=session["uuid"], timeout=300, interval=5
     )
     result = await client.cd.get_task_result(session["uuid"], task["task_id"])
-    print(f"Result URL: {result.result_url}")
+    print(f"Result URL: {result['result_url']}")
 ```
 
-### File Upload
+### Decision Analysis (after a successful CD run)
+
+DA references the CD job via `cd_result_reference`. 
 
 ```python
 async with CausalAIClient(api_key="...", base_url="...") as client:
-    session = await client.kg.init_session()
-    kg = await client.kg.upload_kg_from_file(
-        session_uuid=session.uuid,
-        file_path="graph.json",
-        title="My Graph"
+    da_task = await client.da.run_explain(
+        session_uuid=cd_session_uuid,
+        cd_result_reference={
+            "session_uuid": cd_session_uuid,
+            "task_id": cd_task_id,
+        },
+        current_observation={"debt": 0.4, "age": 35.0},
+        targets=[{"col": "debt", "sense": ">", "threshold": 0.8}],
+        params={"alpha": 1.0, "time_limit": 60.0},
     )
+    await client.da.wait_for_task(cd_session_uuid, da_task["task_id"], timeout=300, interval=5)
+    da_result = await client.da.get_task_result(cd_session_uuid, da_task["task_id"])
 ```
+
+## Examples
+
+See [examples/](examples/) for end-to-end scripts and Jupyter notebooks.
 
 ## Contract Layer and Guardrails
 
 The SDK includes a `contracts` layer that serves two purposes:
 
-- **Runtime consistency**: core service calls (`kg`, `multica`, `trackr`) build paths and validate
-  request payloads through shared contract definitions.
+- **Runtime consistency**: core service calls build paths and validate request payloads through shared contract definitions.
 - **Static guardrail**: a fast test compares SDK contract models with the OpenAPI snapshot used by
   the SDK tests to catch drift before runtime.
 
